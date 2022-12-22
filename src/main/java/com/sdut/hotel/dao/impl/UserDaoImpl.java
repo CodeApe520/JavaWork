@@ -48,4 +48,18 @@ public class UserDaoImpl implements IUserDao {
         int count = jdbcTemplate.update(sql, id);
         return count;
     }
+
+    @Override
+    public Integer deleteAll(Integer[] ids) {
+        //delete from user where id in(?,?)
+        String sql = "delete from user where id in(";
+        for (Integer id: ids) {
+            sql += "?,";
+        }
+        //delete from user where id in(?,?,
+        sql = sql.substring(0, sql.length() - 1);
+        sql +=")";
+        int count = jdbcTemplate.update(sql,ids);
+        return count;
+    }
 }

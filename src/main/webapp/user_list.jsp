@@ -12,12 +12,21 @@
     <%@ include file="header.jsp"%>
 </head>
 <body>
+<%--    右侧工具条--%>
     <script type="text/html" id="barDemo">
         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
-    <table class="layui-hide" id="LAY_table_user" lay-filter="layFilter"></table>
+<%--    顶部工具条--%>
+    <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+            <button class="layui-btn layui-btn-sm" lay-event="deleteAll">批量删除</button>
+        </div>
+    </script>
+
+    <table class="layui-hide" id="test" lay-filter="test"></table>
     <script src="//res/layui/dist/layui.js" charset="utf-8"></script>
     <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
     <script>
@@ -26,8 +35,9 @@
 
             //方法级渲染
             table.render({
-                elem: '#LAY_table_user'
+                elem: '#test'
                 ,url: '${path}/user?method=selectByPage'
+                ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
                 ,cols: [[
                     {checkbox: true, fixed: true}
                     ,{field:'id', title: 'ID', sort: true, fixed: true}
@@ -41,8 +51,59 @@
                 ,page: true
             });
 
+            //头工具栏事件
+            table.on('toolbar(test)', function(obj){
+                var checkStatus = table.checkStatus(obj.config.id);
+                switch(obj.event){
+                    case 'add':
+
+                        break;
+                    case 'deleteAll':
+
+                        var data = checkStatus.data;
+                        // {avatar: '', deleted: 0, email: '123', gmtCreate: null, gmtModified: null, …}, {…}, {…}, {…}, {…}, {…}]
+                        layer.msg('选中了：'+ data.length + ' 个');
+                        var idArray = new Array();
+                        for (var i = 0; i < data.length; i++) {
+                            idArray.push(data[i].id);
+                        }
+                        //[14,15] ->'14,15'
+                        var ids = idArray.join(',');
+                        layer.confirm('真的删除行么', function(index){
+                            //异步请求，局部刷新
+                            $.post(
+                                '${path}/user?method=deleteAll',
+                                {'ids':ids},
+                                function (jsonResult){
+                                    console.log(jsonResult);
+                                    if(jsonResult.ok){
+                                        // mylayer.okMsg(jsonResult.msg)
+                                        mylayer.okMsg('批量删除成功')
+                                        //删除之后，刷新表格展示最新的数据
+                                        table.reload('tableId');
+                                    }else{
+                                        mylayer.errorMsg(jsonResult.msg)
+                                        mylayer.okMsg('批量删除失败')
+                                    }
+                                },
+                                'json'
+                            );
+                            layer.close(index);
+                        });
+                        break;
+                    case 'isAll':
+                        layer.msg(checkStatus.isAll ? '全选': '未全选');
+                        break;
+
+                    //自定义头工具栏右侧图标 - 提示
+                    case 'LAYTABLE_TIPS':
+                        layer.alert('这是工具栏右侧自定义的一个图标按钮');
+                        break;
+                };
+            });
+
             //监听右侧工具条
-            table.on('tool(layFilter)', function(obj){
+            table.on('tool(test)', function(obj){
                 var data = obj.data;
                 if(obj.event === 'detail'){
                     layer.msg('ID：'+ data.id + ' 的查看操作');
@@ -55,11 +116,11 @@
                             function (jsonResult){
                               console.log(jsonResult);
                               if(jsonResult.ok){
-                                  layer.msg("删除成功");
+                                  mylayer.okMsg('删除成功')
                                   //删除之后，刷新表格展示最新的数据
                                   table.reload('tableId');
                               }else{
-                                  layer.msg('删除失败');
+                                  mylayer.errorMsg('删除失败')
                               }
                             },
                             'json'

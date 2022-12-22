@@ -6,6 +6,7 @@ import com.sdut.hotel.pojo.User;
 import com.sdut.hotel.service.IUserService;
 import com.sdut.hotel.utils.LayUITableResult;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //Create by IntelliJ IDEA.
@@ -36,5 +37,16 @@ public class UserServiceImpl implements IUserService {
     public Boolean deleteById(Integer id) {
         Integer count = userDao.deleteById(id);
         return count == 1 ? true : false;
+    }
+
+    @Override
+    public Boolean deleteAll(String[] array) {
+        Integer[] ids = new Integer[array.length];
+        for (int i = 0; i < array.length; i++) {
+            ids[i] = Integer.parseInt(array[i]);
+        }
+
+        int count = userDao.deleteAll(ids);
+        return count == array.length;
     }
 }

@@ -40,11 +40,29 @@ public class UserServlet extends HttpServlet {
             case "selectByPage":
                 selectByPage(req,resp);
                 break;
+            case "deleteAll":
+                deleteAll(req,resp);
+                break;
 
         }
 
 
     }
+
+    private void deleteAll(HttpServletRequest req, HttpServletResponse resp) {
+        System.out.println("UserServlet.selectByAll");
+        //"14，15"
+        String ids = req.getParameter("ids");
+        String[] array = ids.split(",");
+        boolean isSuccess = userService.deleteAll(array);
+
+        if (isSuccess){
+            JSONUtil.obj2Json(JSONResult.ok("删除成功"),resp);
+        }else {
+            JSONUtil.obj2Json(JSONResult.error("删除失败"),resp);
+        }
+    }
+
     //https://www.layuiweb.com/demo/table/user/-page=1&limit=30.js?page=1&limit=10
     ///user?method=selectById&page=1&limit=10
     private void selectByPage(HttpServletRequest req, HttpServletResponse resp) {

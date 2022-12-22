@@ -15,4 +15,5 @@ public interface IUserService {
     LayUITableResult selectByPage(Integer page, Integer limit);
     Boolean deleteById(Integer id);
 
+    Boolean deleteAll(String[] array);
 }
