@@ -19,4 +19,5 @@ public interface IUserDao {
     Integer add(User user);
     User selectById(int id);
     Integer update(User user);
+    User login(String name, String password);
 }

@@ -66,4 +66,10 @@ public class UserServiceImpl implements IUserService {
         int count = userDao.update(user);
         return count == 1;
     }
+
+    @Override
+    public User login(String name, String password) {
+        System.out.println("UserServiceImpl.login");
+        return userDao.login(name,password);
+    }
 }

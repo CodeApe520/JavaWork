@@ -114,18 +114,19 @@
 </body>
 <script type="text/javascript">
 
-    function  submitForm(){
+    function submitForm(){
         $.post(
             '${path}/login?method=login',
-            $('formId').serialize(),
+            $('#formId').serialize(),
             function (jsonResult){
                 if(jsonResult.ok){
                     mylayer.okUrl('登录成功','${path}/index.jsp');
                 }else{
                     mylayer.errorMsg(jsonResult.msg)
                 }
-            }
-        )
+            },
+            'json'
+        );
     }
 
 </script>
