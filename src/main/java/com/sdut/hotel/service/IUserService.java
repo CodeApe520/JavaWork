@@ -18,4 +18,6 @@ public interface IUserService {
     Boolean add(User user);
     User selectById(int id);
     Boolean update(User user);
+
+    User login(String name, String password);
 }
