@@ -8,7 +8,7 @@ var mylayer = {
 	confirm : function(content, url) {
 		layer.confirm(
 			content,
-			{icon : 3},
+			{icon : 3, time : 1000},
 			function(index){//点击确认触发
 				console.log("点击了确认");
 				location.href = url;
@@ -23,21 +23,21 @@ var mylayer = {
 	okMsg : function(content) {
 		layer.msg(
 			content,
-			{icon : 1, time : 3000}
+			{icon : 1, time : 1000}
 		);
 	},
 	// 表达失败的消息
 	errorMsg : function(content) {
 		layer.msg(
 			content,
-			{icon : 2, time : 3000}
+			{icon : 2, time : 1000}
 		);
 	},
 	// 表达成功的msg之后,自动发送一个请求
 	okUrl : function(content, url) {
 		layer.msg(
 			content,
-			{icon : 1, time : 3000},
+			{icon : 1, time : 1000},
 			function() {// msg消失之后触发的函数
 				location.href = url;
 			}

@@ -45,11 +45,49 @@ public class UserServlet extends HttpServlet {
                 break;
             case "add":
                 add(req,resp);
-                break;    
+                break;
+            case "getUserUpdatePage":
+                getUserUpdatePage(req,resp);
+                break;
+            case "update":
+                update(req,resp);
+                break;
 
         }
 
 
+    }
+
+    private void update(HttpServletRequest req, HttpServletResponse resp) {
+        System.out.println("UserServlet.update");
+        String id = req.getParameter("id");
+        System.out.println("UserServlet.add");
+        String name = req.getParameter("name");
+        String password = req.getParameter("password");
+        String email = req.getParameter("email");
+        String phone = req.getParameter("phone");
+        User user = new User();
+        user.setId(Integer.parseInt(id));
+        user.setName(name);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setPhone(phone);
+        user.setAvatar("");
+
+        boolean isSuccess = userService.update(user);
+        if (isSuccess){
+            JSONUtil.obj2Json(JSONResult.ok("修改成功"),resp);
+        }else {
+            JSONUtil.obj2Json(JSONResult.error("修改失败"),resp);
+        }
+    }
+
+    private void getUserUpdatePage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("UserServlet.getUserUpdatePage");
+        String id = req.getParameter("id");
+        User user = userService.selectById(Integer.parseInt(id));
+        req.setAttribute("user",user);
+        req.getRequestDispatcher("/user/user_update.jsp").forward(req,resp);
     }
 
     private void add(HttpServletRequest req, HttpServletResponse resp) {

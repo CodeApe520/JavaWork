@@ -20,7 +20,7 @@
 <%--    顶部工具条--%>
     <script type="text/html" id="toolbarDemo">
         <div class="layui-btn-container">
-            <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+            <button class="layui-btn layui-btn-sm"  lay-event="add">添加</button>
             <button class="layui-btn layui-btn-sm" lay-event="deleteAll">批量删除</button>
         </div>
     </script>
@@ -126,12 +126,18 @@
                                   mylayer.errorMsg('删除失败')
                               }
                             },
-                            'json'
+                            'json',
                         );
                         layer.close(index);
                     });
                 } else if(obj.event === 'edit'){
-                    layer.alert('编辑行：<br>'+ JSON.stringify(data))
+                    layer.open({
+                        type: 2,
+                        area: ['700px','400px'],
+                        //content: '${path}/user/user_add.jsp'
+                        content: '${path}/user?method=getUserUpdatePage&id='+ data.id
+
+                    })
                 }
             });
 

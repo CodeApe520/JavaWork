@@ -16,4 +16,6 @@ public interface IUserService {
     Boolean deleteById(Integer id);
     Boolean deleteAll(String[] array);
     Boolean add(User user);
+    User selectById(int id);
+    Boolean update(User user);
 }
