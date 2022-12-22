@@ -3,18 +3,10 @@ package com.sdut.hotel.dao.impl;
 import com.sdut.hotel.dao.IUserDao;
 import com.sdut.hotel.pojo.User;
 import com.sdut.hotel.utils.JDBCUtil;
-import com.sdut.hotel.utils.JDBCUtil_Back;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 //Create by IntelliJ IDEA.
 //Have a good day!

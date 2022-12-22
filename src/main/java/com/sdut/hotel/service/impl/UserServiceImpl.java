@@ -5,6 +5,7 @@ import com.sdut.hotel.dao.impl.UserDaoImpl;
 import com.sdut.hotel.pojo.User;
 import com.sdut.hotel.service.IUserService;
 import com.sdut.hotel.utils.LayUITableResult;
+import com.sdut.hotel.utils.MD5Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public Boolean add(User user) {
+        //添加用户时候将密码以密文形式储存在数据库中
+        user.setPassword(MD5Util.MD5Encode(user.getPassword()));
         int count = userDao.add(user);
         return count == 1;
     }
@@ -70,6 +73,6 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User login(String name, String password) {
         System.out.println("UserServiceImpl.login");
-        return userDao.login(name,password);
+        return userDao.login(name,MD5Util.MD5Encode(password));
     }
 }
