@@ -43,10 +43,34 @@ public class UserServlet extends HttpServlet {
             case "deleteAll":
                 deleteAll(req,resp);
                 break;
+            case "add":
+                add(req,resp);
+                break;    
 
         }
 
 
+    }
+
+    private void add(HttpServletRequest req, HttpServletResponse resp) {
+        System.out.println("UserServlet.add");
+        String name = req.getParameter("name");
+        String password = req.getParameter("password");
+        String email = req.getParameter("email");
+        String phone = req.getParameter("phone");
+        User user = new User();
+        user.setName(name);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setPhone(phone);
+        user.setAvatar("");
+
+        boolean isSuccess = userService.add(user);
+        if (isSuccess){
+            JSONUtil.obj2Json(JSONResult.ok("添加成功"),resp);
+        }else {
+            JSONUtil.obj2Json(JSONResult.error("添加失败"),resp);
+        }
     }
 
     private void deleteAll(HttpServletRequest req, HttpServletResponse resp) {

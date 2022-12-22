@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 //Create by IntelliJ IDEA.
 //Have a good day!
@@ -30,7 +32,7 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public List<User> selectByPage(Integer offset, Integer limit) {
-        String sql = "select id,name,password,email,phone from user limit ?,?";
+        String sql = "select id,`name`,password,email,phone from user order by id limit ?,?";
         List<User> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<User>(User.class),offset,limit);
         return list;
     }
@@ -53,6 +55,7 @@ public class UserDaoImpl implements IUserDao {
     public Integer deleteAll(Integer[] ids) {
         //delete from user where id in(?,?)
         String sql = "delete from user where id in(";
+        //sql += Stream.of(ids).map(item -> "?").collect(Collectors.joining(","));
         for (Integer id: ids) {
             sql += "?,";
         }
@@ -60,6 +63,13 @@ public class UserDaoImpl implements IUserDao {
         sql = sql.substring(0, sql.length() - 1);
         sql +=")";
         int count = jdbcTemplate.update(sql,ids);
+        return count;
+    }
+
+    @Override
+    public Integer add(User user) {
+        String sql = "insert into user(name,password,email,phone,avatar) values(?,?,?,?,?)";
+        int count = jdbcTemplate.update(sql, user.getName(),user.getPassword(),user.getEmail(),user.getPhone(),user.getAvatar());
         return count;
     }
 }

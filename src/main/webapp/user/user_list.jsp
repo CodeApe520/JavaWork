@@ -9,12 +9,11 @@
 <html>
 <head>
     <title>Title</title>
-    <%@ include file="header.jsp"%>
+    <%@ include file="../header.jsp"%>
 </head>
 <body>
 <%--    右侧工具条--%>
     <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
@@ -56,7 +55,13 @@
                 var checkStatus = table.checkStatus(obj.config.id);
                 switch(obj.event){
                     case 'add':
+                        //location.href = "${path}/user/user_add.jsp"
+                        layer.open({
+                            type: 2,
+                            area: ['700px','400px'],
+                            content: '${path}/user/user_add.jsp'
 
+                        })
                         break;
                     case 'deleteAll':
 
@@ -105,9 +110,7 @@
             //监听右侧工具条
             table.on('tool(test)', function(obj){
                 var data = obj.data;
-                if(obj.event === 'detail'){
-                    layer.msg('ID：'+ data.id + ' 的查看操作');
-                } else if(obj.event === 'del'){
+                if(obj.event === 'del'){
                     layer.confirm('真的删除行么', function(index){
                         //异步请求，局部刷新
                         $.post(
