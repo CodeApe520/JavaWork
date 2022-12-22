@@ -3,7 +3,6 @@ package com.sdut.hotel.controller;
 import com.sdut.hotel.pojo.User;
 import com.sdut.hotel.service.IUserService;
 import com.sdut.hotel.service.impl.UserServiceImpl;
-import com.sdut.hotel.utils.JDBCUtil;
 import com.sdut.hotel.utils.JSONResult;
 import com.sdut.hotel.utils.JSONUtil;
 import com.sdut.hotel.utils.LayUITableResult;
@@ -14,8 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 //Create by IntelliJ IDEA.
