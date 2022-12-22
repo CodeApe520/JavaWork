@@ -5,6 +5,7 @@ import com.sdut.hotel.pojo.User;
 import com.sdut.hotel.utils.JDBCUtil;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -83,7 +84,12 @@ public class UserDaoImpl implements IUserDao {
     public User login(String name, String password) {
         System.out.println("UserDaoImpl.login");
         String sql = "select id,name,password,email,phone from user where name=? and password =?";
-        User user = jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<User>(User.class),name,password);
-        return user;
+//        User user = jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<User>(User.class),name,password);
+//        return user;
+        List<User> list = jdbcTemplate.query(sql,new BeanPropertyRowMapper<User>(User.class),name,password);
+        if(CollectionUtils.isEmpty(list)){
+            return null;
+        }
+        return list.get(0);
     }
 }
