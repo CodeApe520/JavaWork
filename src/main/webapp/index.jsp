@@ -15,7 +15,7 @@
 				    <a href="javascript:;"> 
 <%-- 				        <img src="<%=path%>/img/fei.png" --%>
 <!-- 				        class="layui-nav-img"/> -->
-				        	用户${user.name}
+				        	用户: ${user.name}
 <%-- 				        	[${user.name}] --%>
 				    </a>
 					<dl class="layui-nav-child">

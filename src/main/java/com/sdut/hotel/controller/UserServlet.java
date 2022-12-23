@@ -29,6 +29,7 @@ public class UserServlet extends HttpServlet {
     //http://localhost:8081/hotel/?deleteById&id=1
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        req.setCharacterEncoding("utf-8");
         String method = req.getParameter("method");
         switch (method){
             case "selectAll":

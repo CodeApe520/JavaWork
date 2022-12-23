@@ -55,6 +55,8 @@ public class LoginServlet extends HttpServlet {
 
         User user = userService.login(name,password);
         if(user != null){
+            //登录上之后，把这个凭证保存在session中
+            session.setAttribute("user",user);
             JSONUtil.obj2Json(JSONResult.ok("登录成功"),resp);
         }else {
             JSONUtil.obj2Json(JSONResult.error("用户名或密码错误"),resp);

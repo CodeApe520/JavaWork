@@ -71,6 +71,9 @@ public class UserDaoImpl implements IUserDao {
         String sql = "select id,`name`,password,email,phone from user where id=?";
         //User user = jdbcTemplate.queryForObject(sql, User.class, id);
         List<User> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class), id);
+        if (CollectionUtils.isEmpty(list)){
+            return null;
+        }
         return list.get(0);
     }
 
