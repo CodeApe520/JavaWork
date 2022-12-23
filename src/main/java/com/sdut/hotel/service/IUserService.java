@@ -1,6 +1,7 @@
 package com.sdut.hotel.service;
 
 import com.sdut.hotel.pojo.User;
+import com.sdut.hotel.pojo.query.UserQuery;
 import com.sdut.hotel.utils.LayUITableResult;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 //Time: 16:51
 public interface IUserService {
     List<User> selectAll();
-    LayUITableResult selectByPage(Integer page, Integer limit);
+    LayUITableResult selectByPage(UserQuery userQuery);
     Boolean deleteById(Integer id);
     Boolean deleteAll(String[] array);
     Boolean add(User user);

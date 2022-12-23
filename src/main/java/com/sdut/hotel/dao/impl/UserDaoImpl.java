@@ -2,11 +2,14 @@ package com.sdut.hotel.dao.impl;
 
 import com.sdut.hotel.dao.IUserDao;
 import com.sdut.hotel.pojo.User;
+import com.sdut.hotel.pojo.query.UserQuery;
 import com.sdut.hotel.utils.JDBCUtil;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //Create by IntelliJ IDEA.
@@ -24,16 +27,56 @@ public class UserDaoImpl implements IUserDao {
     }
 
     @Override
-    public List<User> selectByPage(Integer offset, Integer limit) {
-        String sql = "select id,`name`,password,email,phone from user order by id limit ?,?";
-        List<User> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<User>(User.class),offset,limit);
+    public List<User> selectByPage(UserQuery userQuery) {
+        String sql = "select id,name,password,email,phone from user ";
+
+        //查询参数
+        List<Object> args = new ArrayList<>();
+        String where = "where 1=1 ";
+        if (!StringUtils.isEmpty(userQuery.getName())){
+            where += "and name like ?";
+            args.add("%"+userQuery.getName() +"%");
+        }
+        if (!StringUtils.isEmpty(userQuery.getEmail())){
+            where += "and email=?";
+            args.add(userQuery.getEmail());
+        }
+        if (!StringUtils.isEmpty(userQuery.getPhone())){
+            where += "and phone=?";
+            args.add(userQuery.getPhone());
+        }
+
+        String  limit = "";
+        if (userQuery != null){
+            int offset =(userQuery.getPage() - 1) * userQuery.getLimit();
+            limit = "order by id desc limit "+ offset + ","+ userQuery.getLimit();
+        }
+        List<User> list = jdbcTemplate.query(sql + where + limit, new BeanPropertyRowMapper<User>(User.class),args.toArray());
         return list;
     }
 
     @Override
-    public Long selectTotalCount() {
-        String sql = "select count(*) from user";
-        Long totalCount = jdbcTemplate.queryForObject(sql, Long.class);
+    public Long selectTotalCount(UserQuery userQuery) {
+        //三个搜索条件 应该有值就拼接，没有值不拼接
+        String sql = "select count(*) from user ";
+
+        //查询参数
+        List<Object> args = new ArrayList<>();
+        String where = "where 1=1 ";
+        if (!StringUtils.isEmpty(userQuery.getName())){
+            where += "and name like ?";
+            args.add("%"+userQuery.getName() +"%");
+        }
+        if (!StringUtils.isEmpty(userQuery.getEmail())){
+            where += "and email=?";
+            args.add(userQuery.getEmail());
+        }
+        if (!StringUtils.isEmpty(userQuery.getName())){
+            where += "and phone=?";
+            args.add(userQuery.getPhone());
+        }
+
+        Long totalCount = jdbcTemplate.queryForObject(sql+where, Long.class,args.toArray());
         return totalCount;
     }
 

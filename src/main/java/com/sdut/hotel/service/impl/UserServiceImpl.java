@@ -3,6 +3,7 @@ package com.sdut.hotel.service.impl;
 import com.sdut.hotel.dao.IUserDao;
 import com.sdut.hotel.dao.impl.UserDaoImpl;
 import com.sdut.hotel.pojo.User;
+import com.sdut.hotel.pojo.query.UserQuery;
 import com.sdut.hotel.service.IUserService;
 import com.sdut.hotel.utils.LayUITableResult;
 import com.sdut.hotel.utils.MD5Util;
@@ -24,13 +25,12 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public LayUITableResult selectByPage(Integer page, Integer limit) {
+    public LayUITableResult selectByPage(UserQuery userQuery) {
         //查询当前页的数量
-        int offset = (page -1) * limit;
-        List<User> list = userDao.selectByPage(offset,limit);
+        List<User> list = userDao.selectByPage(userQuery);
 
         //查询总的数量
-        Long totalCount = userDao.selectTotalCount();
+        Long totalCount = userDao.selectTotalCount(userQuery);
         return LayUITableResult.ok(list, totalCount);
     }
 

@@ -1,6 +1,7 @@
 package com.sdut.hotel.dao;
 
 import com.sdut.hotel.pojo.User;
+import com.sdut.hotel.pojo.query.UserQuery;
 import com.sdut.hotel.utils.LayUITableResult;
 
 import java.util.List;
@@ -12,8 +13,8 @@ import java.util.List;
 //Time: 16:57
 public interface IUserDao {
     List<User> selectAll();
-    List<User> selectByPage(Integer offset, Integer limit);
-    Long selectTotalCount();
+    List<User> selectByPage(UserQuery userQuery);
+    Long selectTotalCount(UserQuery userQuery);
     Integer deleteById(Integer id);
     Integer deleteAll(Integer[] ids);
     Integer add(User user);

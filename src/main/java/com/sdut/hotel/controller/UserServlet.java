@@ -1,6 +1,7 @@
 package com.sdut.hotel.controller;
 
 import com.sdut.hotel.pojo.User;
+import com.sdut.hotel.pojo.query.UserQuery;
 import com.sdut.hotel.service.IUserService;
 import com.sdut.hotel.service.impl.UserServiceImpl;
 import com.sdut.hotel.utils.JSONResult;
@@ -27,6 +28,7 @@ public class UserServlet extends HttpServlet {
 
     //http://localhost:8081/hotel/?method
     //http://localhost:8081/hotel/?deleteById&id=1
+    // /hotel/user?method=selectByPage&page=1&limit=10&name=&email=&phone=
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        req.setCharacterEncoding("utf-8");
@@ -133,7 +135,14 @@ public class UserServlet extends HttpServlet {
         System.out.println("UserServlet.selectByPage");
         int page = Integer.parseInt(req.getParameter("page"));
         int limit = Integer.parseInt(req.getParameter("limit"));
-        LayUITableResult layUITableResult = userService.selectByPage(page,limit);
+        String name = req.getParameter("name");
+        String email = req.getParameter("email");
+        String phone = req.getParameter("phone");
+
+        UserQuery userQuery = new UserQuery(page,limit,name,email,phone);
+
+
+        LayUITableResult layUITableResult = userService.selectByPage(userQuery);
         JSONUtil.obj2Json(layUITableResult,resp);
 
     }
