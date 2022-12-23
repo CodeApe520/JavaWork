@@ -63,8 +63,14 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    private void logout(HttpServletRequest req, HttpServletResponse resp) {
+    private void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         System.out.println("LoginServlet.logout");
+        //注销：删除在session中的凭证，然后重定向到登录页面
+        HttpSession session = req.getSession();
+        session.removeAttribute("user");
+        session.invalidate();
+
+        resp.sendRedirect(req.getContextPath() + "/login.jsp");
     }
 
 
