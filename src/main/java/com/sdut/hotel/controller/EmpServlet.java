@@ -73,7 +73,7 @@ public class EmpServlet extends HttpServlet {
         Emp emp = new Emp();
         emp.setId(Integer.parseInt(id));
         emp.setName(name);
-        emp.setDepId(Integer.parseInt(deptId));
+        emp.setDeptId(Integer.parseInt(deptId));
         emp.setEmail(email);
         emp.setPhone(phone);
 
@@ -101,7 +101,7 @@ public class EmpServlet extends HttpServlet {
         String phone = req.getParameter("phone");
         Emp emp = new Emp();
         emp.setName(name);
-        emp.setDepId(Integer.parseInt(deptId));
+        emp.setDeptId(Integer.parseInt(deptId));
         emp.setEmail(email);
         emp.setPhone(phone);
 

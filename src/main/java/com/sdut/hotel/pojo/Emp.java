@@ -16,7 +16,7 @@ public class Emp {
     private String email;
     private String phone;
     //所在部门id
-    private Integer depId;
+    private Integer deptId;
     private Integer deleted;
     private Date gmtCreate;
     private Date gmtModified;
