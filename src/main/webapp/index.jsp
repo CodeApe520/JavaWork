@@ -84,7 +84,7 @@
 			</div>
 		</div>
 		<div class="layui-body"><!-- 内容主体区域 -->
-			<iframe name="rightframe" width="99%" height="97%" src="/echarts/getEChartsPage"></iframe>
+			<iframe name="rightframe" width="99%" height="97%" src="${path}/echarts.jsp"></iframe>
 		</div>
 		<div class="layui-footer">© JAVA - 底部固定区域</div>
 	</div>

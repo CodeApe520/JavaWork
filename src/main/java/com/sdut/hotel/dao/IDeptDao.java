@@ -1,5 +1,6 @@
 package com.sdut.hotel.dao;
 
+import com.sdut.hotel.dao.vo.DeptCountVO;
 import com.sdut.hotel.pojo.Dept;
 import com.sdut.hotel.pojo.query.DeptQuery;
 
@@ -19,4 +20,5 @@ public interface IDeptDao {
     Integer add(Dept dept);
     Dept selectById(int id);
     Integer update(Dept dept);
+    List<DeptCountVO> selectDeptCount();
 }

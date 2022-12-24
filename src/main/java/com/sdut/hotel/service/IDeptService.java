@@ -2,6 +2,7 @@ package com.sdut.hotel.service;
 
 import com.sdut.hotel.pojo.Dept;
 import com.sdut.hotel.pojo.query.DeptQuery;
+import com.sdut.hotel.utils.JSONResult;
 import com.sdut.hotel.utils.LayUITableResult;
 
 import java.util.List;
@@ -19,4 +20,5 @@ public interface IDeptService {
     Boolean add(Dept dept);
     Dept selectById(int id);
     Boolean update(Dept dept);
+    JSONResult selectDeptCount();
 }

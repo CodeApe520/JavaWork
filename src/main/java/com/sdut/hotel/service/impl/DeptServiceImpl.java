@@ -2,9 +2,11 @@ package com.sdut.hotel.service.impl;
 
 import com.sdut.hotel.dao.IDeptDao;
 import com.sdut.hotel.dao.impl.DeptDaoImpl;
+import com.sdut.hotel.dao.vo.DeptCountVO;
 import com.sdut.hotel.pojo.Dept;
 import com.sdut.hotel.pojo.query.DeptQuery;
 import com.sdut.hotel.service.IDeptService;
+import com.sdut.hotel.utils.JSONResult;
 import com.sdut.hotel.utils.LayUITableResult;
 
 import java.util.List;
@@ -65,6 +67,12 @@ public class DeptServiceImpl implements IDeptService {
     public Boolean update(Dept dept) {
         int count = deptDao.update(dept);
         return count == 1;
+    }
+
+    @Override
+    public JSONResult selectDeptCount() {
+        List<DeptCountVO> list =deptDao.selectDeptCount();
+        return JSONResult.ok(list);
     }
 
 }

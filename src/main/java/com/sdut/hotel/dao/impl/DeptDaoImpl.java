@@ -1,6 +1,7 @@
 package com.sdut.hotel.dao.impl;
 
 import com.sdut.hotel.dao.IDeptDao;
+import com.sdut.hotel.dao.vo.DeptCountVO;
 import com.sdut.hotel.pojo.Dept;
 import com.sdut.hotel.pojo.query.DeptQuery;
 import com.sdut.hotel.utils.JDBCUtil;
@@ -121,5 +122,11 @@ public class DeptDaoImpl implements IDeptDao {
         String sql = "update dept set name=?,addr=? where id=?";
         int count = jdbcTemplate.update(sql, dept.getName(),dept.getAddr(),dept.getId());
         return count;    }
+
+    @Override
+    public List<DeptCountVO> selectDeptCount() {
+        String sql = "SELECT d.name,count(*) as value FROM emp AS e INNER JOIN dept AS d on e.dept_id=d.id GROUP BY d.id";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<DeptCountVO>(DeptCountVO.class));
+    }
 
 }
