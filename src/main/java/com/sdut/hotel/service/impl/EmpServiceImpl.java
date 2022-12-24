@@ -2,6 +2,7 @@ package com.sdut.hotel.service.impl;
 
 import com.sdut.hotel.dao.IEmpDao;
 import com.sdut.hotel.dao.impl.EmpDaoImpl;
+import com.sdut.hotel.dao.vo.EmpDeptVO;
 import com.sdut.hotel.pojo.Emp;
 import com.sdut.hotel.pojo.query.EmpQuery;
 import com.sdut.hotel.service.IEmpService;
@@ -26,7 +27,7 @@ public class EmpServiceImpl implements IEmpService {
     @Override
     public LayUITableResult selectByPage(EmpQuery empQuery) {
         //查询当前页的数量
-        List<Emp> list = empDao.selectByPage(empQuery);
+        List<EmpDeptVO> list = empDao.selectByPage(empQuery);
 
         //查询总的数量
         Long totalCount = empDao.selectTotalCount(empQuery);

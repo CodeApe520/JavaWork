@@ -1,6 +1,7 @@
 package com.sdut.hotel.dao.impl;
 
 import com.sdut.hotel.dao.IEmpDao;
+import com.sdut.hotel.dao.vo.EmpDeptVO;
 import com.sdut.hotel.pojo.Emp;
 import com.sdut.hotel.pojo.query.EmpQuery;
 import com.sdut.hotel.utils.JDBCUtil;
@@ -27,8 +28,10 @@ public class EmpDaoImpl implements IEmpDao {
     }
 
     @Override
-    public List<Emp> selectByPage(EmpQuery empQuery) {
-        String sql = "select id,name,dept_id,email,phone from emp ";
+    public List<EmpDeptVO> selectByPage(EmpQuery empQuery) {
+        String sql = "SELECT e.id,e.name,e.email,e.phone,d.id as deptId, d.name as deptName\n" +
+                "from emp As e INNER JOIN dept AS d \n" +
+                "on e.dept_id=d.id ";
 
         //查询参数
         List<Object> args = new ArrayList<>();
@@ -51,7 +54,7 @@ public class EmpDaoImpl implements IEmpDao {
             int offset =(empQuery.getPage() - 1) * empQuery.getLimit();
             limit = "order by id desc limit "+ offset + ","+ empQuery.getLimit();
         }
-        List<Emp> list = jdbcTemplate.query(sql + where + limit, new BeanPropertyRowMapper<Emp>(Emp.class),args.toArray());
+        List<EmpDeptVO> list = jdbcTemplate.query(sql + where + limit, new BeanPropertyRowMapper<EmpDeptVO>(EmpDeptVO.class),args.toArray());
         return list;
     }
 

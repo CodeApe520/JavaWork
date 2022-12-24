@@ -1,5 +1,6 @@
 package com.sdut.hotel.dao;
 
+import com.sdut.hotel.dao.vo.EmpDeptVO;
 import com.sdut.hotel.pojo.Emp;
 import com.sdut.hotel.pojo.query.EmpQuery;
 
@@ -12,7 +13,7 @@ import java.util.List;
 //Time: 16:57
 public interface IEmpDao {
     List<Emp> selectAll();
-    List<Emp> selectByPage(EmpQuery empQuery);
+    List<EmpDeptVO> selectByPage(EmpQuery empQuery);
     Long selectTotalCount(EmpQuery empQuery);
     Integer deleteById(Integer id);
     Integer deleteAll(Integer[] ids);
