@@ -74,7 +74,7 @@
                         layer.open({
                             type: 2,
                             area: ['700px','400px'],
-                            content: '${path}/emp/emp_add.jsp'
+                            content: '${path}/emp?method=getEmpAddPage'
 
                         })
                         break;

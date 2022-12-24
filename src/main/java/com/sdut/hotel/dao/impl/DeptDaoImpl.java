@@ -22,7 +22,7 @@ public class DeptDaoImpl implements IDeptDao {
     private JdbcTemplate jdbcTemplate = new JdbcTemplate(JDBCUtil.getDataSource());
     @Override
     public List<Dept> selectAll() {
-        String sql = "select id,name,dept_id,email,phone from dept";
+        String sql = "select id,name,addr from dept";
         List<Dept> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Dept>(Dept.class));
         return list;
     }

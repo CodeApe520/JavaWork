@@ -1,8 +1,11 @@
 package com.sdut.hotel.controller;
 
+import com.sdut.hotel.pojo.Dept;
 import com.sdut.hotel.pojo.Emp;
 import com.sdut.hotel.pojo.query.EmpQuery;
+import com.sdut.hotel.service.IDeptService;
 import com.sdut.hotel.service.IEmpService;
+import com.sdut.hotel.service.impl.DeptServiceImpl;
 import com.sdut.hotel.service.impl.EmpServiceImpl;
 import com.sdut.hotel.utils.JSONResult;
 import com.sdut.hotel.utils.JSONUtil;
@@ -23,8 +26,8 @@ import java.util.List;
 //Time: 10:47
 @WebServlet("/emp")
 public class EmpServlet extends HttpServlet {
-
     private IEmpService empService = new EmpServiceImpl();
+    private IDeptService deptService = new DeptServiceImpl();
 
     //http://localhost:8081/hotel/?method
     //http://localhost:8081/hotel/?deleteById&id=1
@@ -55,11 +58,20 @@ public class EmpServlet extends HttpServlet {
             case "update":
                 update(req,resp);
                 break;
-
+            case "getEmpAddPage":
+                getEmpAddPage(req,resp);
+                break;
 
         }
 
 
+    }
+
+    private void getEmpAddPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("EmpServlet.getEmpAddPage");
+        List<Dept> list = deptService.selectAll();
+        req.setAttribute("list",list);
+        req.getRequestDispatcher("emp/emp_add.jsp").forward(req,resp);
     }
 
     private void update(HttpServletRequest req, HttpServletResponse resp) {
@@ -73,7 +85,7 @@ public class EmpServlet extends HttpServlet {
         Emp emp = new Emp();
         emp.setId(Integer.parseInt(id));
         emp.setName(name);
-        emp.setDepId(Integer.parseInt(deptId));
+        emp.setDeptId(Integer.parseInt(deptId));
         emp.setEmail(email);
         emp.setPhone(phone);
 
@@ -101,7 +113,7 @@ public class EmpServlet extends HttpServlet {
         String phone = req.getParameter("phone");
         Emp emp = new Emp();
         emp.setName(name);
-        emp.setDepId(Integer.parseInt(deptId));
+        emp.setDeptId(Integer.parseInt(deptId));
         emp.setEmail(email);
         emp.setPhone(phone);
 
