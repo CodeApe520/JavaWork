@@ -18,6 +18,9 @@ public class UserQuery {
     private String  name ;
     private String  email ;
     private String  phone ;
+    private Integer type;
     private Date beginDate;
     private Date endDate;
+
+
 }

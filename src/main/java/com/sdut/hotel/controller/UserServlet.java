@@ -8,6 +8,7 @@ import com.sdut.hotel.utils.DateUtil;
 import com.sdut.hotel.utils.JSONResult;
 import com.sdut.hotel.utils.JSONUtil;
 import com.sdut.hotel.utils.LayUITableResult;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,11 +57,25 @@ public class UserServlet extends HttpServlet {
             case "update":
                 update(req,resp);
                 break;
-
-
+            case "updateStatus":
+                updateStatus(req,resp);
+                break;
         }
 
 
+    }
+
+    private void updateStatus(HttpServletRequest req, HttpServletResponse resp) {
+        System.out.println("UserServlet.updateStatus");
+        String id = req.getParameter("id");
+        String status = req.getParameter("status");
+        boolean isSuccess =userService.updateStatus(id,Integer.parseInt(status));
+
+        if (isSuccess){
+            JSONUtil.obj2Json(JSONResult.ok("修改状态成功"),resp);
+        }else {
+            JSONUtil.obj2Json(JSONResult.error("修改状态失败"),resp);
+        }
     }
 
     private void update(HttpServletRequest req, HttpServletResponse resp) {
@@ -141,10 +156,15 @@ public class UserServlet extends HttpServlet {
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         String phone = req.getParameter("phone");
+        String typeStr = req.getParameter("type");
+        Integer type = null;
+        if (!StringUtils.isEmpty(typeStr)){
+            type = Integer.parseInt(typeStr);
+        }
         String beginDate = req.getParameter("beginDate");
         String endDate = req.getParameter("endDate");
 
-        UserQuery userQuery = new UserQuery(page,limit,name,email,phone, DateUtil.parse(beginDate),DateUtil.parse(endDate));
+        UserQuery userQuery = new UserQuery(page,limit,name,email,phone,type, DateUtil.parse(beginDate),DateUtil.parse(endDate));
 
 
         LayUITableResult layUITableResult = userService.selectByPage(userQuery);

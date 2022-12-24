@@ -19,7 +19,7 @@ import java.net.HttpRetryException;
 //Date: 2022/12/23
 //Time: 08:53
 //  /*代表拦截所有的请求
-@WebFilter(filterName = "login" , urlPatterns = "/*")
+//@WebFilter(filterName = "login" , urlPatterns = "/*")
 public class LoginFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

@@ -20,4 +20,5 @@ public interface IUserService {
     User selectById(int id);
     Boolean update(User user);
     User login(String name, String password);
+    Boolean updateStatus(String id, Integer status);
 }

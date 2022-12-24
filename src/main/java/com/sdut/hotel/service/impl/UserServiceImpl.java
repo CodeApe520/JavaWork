@@ -75,4 +75,10 @@ public class UserServiceImpl implements IUserService {
         System.out.println("UserServiceImpl.login");
         return userDao.login(name,MD5Util.MD5Encode(password));
     }
+
+    @Override
+    public Boolean updateStatus(String id, Integer status) {
+        int count = userDao.updateStatus(id,status);
+        return count == 1;
+    }
 }

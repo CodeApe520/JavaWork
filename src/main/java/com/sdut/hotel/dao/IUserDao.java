@@ -21,4 +21,5 @@ public interface IUserDao {
     User selectById(int id);
     Integer update(User user);
     User login(String name, String password);
+    Integer updateStatus(String id, Integer status);
 }

@@ -52,8 +52,13 @@ public class LoginServlet extends HttpServlet {
         }
 
         User user = userService.login(name,password);
+        //判断这个用户是不是可用
         if(user != null){
             //登录上之后，把这个凭证保存在session中
+            if(user.getStatus() != 1){
+                JSONUtil.obj2Json(JSONResult.error("该用户已经被禁用"),resp);
+                return;
+            }
             session.setAttribute("user",user);
             JSONUtil.obj2Json(JSONResult.ok("登录成功"),resp);
         }else {

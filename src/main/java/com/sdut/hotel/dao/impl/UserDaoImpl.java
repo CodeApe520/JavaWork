@@ -50,11 +50,15 @@ public class UserDaoImpl implements IUserDao {
             args.add(userQuery.getBeginDate());
             args.add(userQuery.getEndDate());
         }
+        if(userQuery.getType() !=null){
+            where += "and type =?";
+            args.add(userQuery.getType());
+        }
 
         String  limit = "";
         if (userQuery != null){
             int offset =(userQuery.getPage() - 1) * userQuery.getLimit();
-            limit = "order by id desc limit "+ offset + ","+ userQuery.getLimit();
+            limit = " order by id desc limit "+ offset + ","+ userQuery.getLimit();
         }
         List<User> list = jdbcTemplate.query(sql + where + limit, new BeanPropertyRowMapper<User>(User.class),args.toArray());
         return list;
@@ -79,6 +83,10 @@ public class UserDaoImpl implements IUserDao {
         if (!StringUtils.isEmpty(userQuery.getName())){
             where += "and phone=?";
             args.add(userQuery.getPhone());
+        }
+        if(userQuery.getType() !=null){
+            where += "and type =?";
+            args.add(userQuery.getType());
         }
 
         Long totalCount = jdbcTemplate.queryForObject(sql+where, Long.class,args.toArray());
@@ -134,7 +142,7 @@ public class UserDaoImpl implements IUserDao {
     @Override
     public User login(String name, String password) {
         System.out.println("UserDaoImpl.login");
-        String sql = "select id,name,password,email,phone,type from user where name=? and password =?";
+        String sql = "select id,name,password,email,phone,type,status from user where name=? and password =?";
 //        User user = jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<User>(User.class),name,password);
 //        return user;
         List<User> list = jdbcTemplate.query(sql,new BeanPropertyRowMapper<User>(User.class),name,password);
@@ -142,5 +150,12 @@ public class UserDaoImpl implements IUserDao {
             return null;
         }
         return list.get(0);
+    }
+
+    @Override
+    public Integer updateStatus(String id, Integer status) {
+        String sql = "update user set status=? where id=?";
+        int count = jdbcTemplate.update(sql,status,id);
+        return count;
     }
 }
