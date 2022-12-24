@@ -3,6 +3,8 @@ package com.sdut.hotel.pojo.query;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.Date;
+
 //Create by IntelliJ IDEA.
 //Have a good day!
 //User: jiruichang
@@ -16,4 +18,6 @@ public class UserQuery {
     private String  name ;
     private String  email ;
     private String  phone ;
+    private Date beginDate;
+    private Date endDate;
 }

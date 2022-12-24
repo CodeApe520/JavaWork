@@ -4,6 +4,7 @@ import com.sdut.hotel.pojo.User;
 import com.sdut.hotel.pojo.query.UserQuery;
 import com.sdut.hotel.service.IUserService;
 import com.sdut.hotel.service.impl.UserServiceImpl;
+import com.sdut.hotel.utils.DateUtil;
 import com.sdut.hotel.utils.JSONResult;
 import com.sdut.hotel.utils.JSONUtil;
 import com.sdut.hotel.utils.LayUITableResult;
@@ -138,8 +139,10 @@ public class UserServlet extends HttpServlet {
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         String phone = req.getParameter("phone");
+        String beginDate = req.getParameter("beginDate");
+        String endDate = req.getParameter("endDate");
 
-        UserQuery userQuery = new UserQuery(page,limit,name,email,phone);
+        UserQuery userQuery = new UserQuery(page,limit,name,email,phone, DateUtil.parse(beginDate),DateUtil.parse(endDate));
 
 
         LayUITableResult layUITableResult = userService.selectByPage(userQuery);

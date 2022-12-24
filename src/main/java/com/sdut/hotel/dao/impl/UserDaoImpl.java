@@ -28,7 +28,7 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public List<User> selectByPage(UserQuery userQuery) {
-        String sql = "select id,name,password,email,phone from user ";
+        String sql = "select id,name,password,email,phone,status,gmt_create,gmt_modified from user ";
 
         //查询参数
         List<Object> args = new ArrayList<>();
@@ -44,6 +44,11 @@ public class UserDaoImpl implements IUserDao {
         if (!StringUtils.isEmpty(userQuery.getPhone())){
             where += "and phone=?";
             args.add(userQuery.getPhone());
+        }
+        if(userQuery.getBeginDate() != null && userQuery.getEndDate() != null){
+            where += "and gmt_create between ? and ? ";
+            args.add(userQuery.getBeginDate());
+            args.add(userQuery.getEndDate());
         }
 
         String  limit = "";

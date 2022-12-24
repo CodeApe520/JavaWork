@@ -38,14 +38,36 @@
             <input class="layui-input" name="phone" id="phoneId" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
+        <br>
+        开始时间：
+        <div class="layui-inline">
+            <input type="text" class="layui-input" id="beginDateId" placeholder="yyyy-MM-dd HH:mm:ss">
+        </div>
+        结束时间：
+        <div class="layui-inline">
+            <input type="text" class="layui-input" id="endDateId" placeholder="yyyy-MM-dd HH:mm:ss">
+        </div>
+
     </div>
 
     <table class="layui-hide" id="test" lay-filter="test"></table>
     <script src="//res/layui/dist/layui.js" charset="utf-8"></script>
-    <!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
     <script>
-        layui.use('table', function(){
+        layui.use(['table','laydate'], function(){
             var table = layui.table;
+            var laydate = layui.laydate
+
+            //日期时间选择器
+            laydate.render({
+                elem: '#beginDateId'
+                ,type: 'datetime'
+            });
+            //日期时间选择器
+            laydate.render({
+                elem: '#endDateId'
+                ,type: 'datetime'
+            });
+
 
             //方法级渲染
             table.render({
@@ -59,6 +81,9 @@
                     ,{field:'password', title: '密码'}
                     ,{field:'email', title: '邮箱'}
                     ,{field:'phone', title: '电话'}
+                    ,{field:'status', title: '状态'}
+                    ,{field:'gmtCreate', title: '创建时间',templet:"<div>{{!d.gmtCreate.time?'':layui.util.toDateString(d.gmtCreate.time,'yyyy-MM-dd HH:mm:ss')}}</div>"}
+                    ,{field:'gmtModified', title: '更新时间',templet:"<div>{{!d.gmtCreate.time?'':layui.util.toDateString(d.gmtCreate.time,'yyyy-MM-dd HH:mm:ss')}}</div>"}
                     ,{field:'phone', title: '操作', toolbar :'#barDemo'}
                 ]]
                 ,id: 'tableId'
@@ -169,6 +194,8 @@
                            name : $('#nameId').val(),
                            email : $('#emailId').val(),
                            phone : $('#phoneId').val(),
+                           beginDate : $('#beginDateId').val(),
+                           endDate : $('#endDateId').val(),
                         }
                     });
                 }
