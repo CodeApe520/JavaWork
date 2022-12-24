@@ -41,8 +41,6 @@ public class LoginServlet extends HttpServlet {
         String name = req.getParameter("name");
         String password = req.getParameter("password");
         String code = req.getParameter("code");
-        System.out.println(name);
-        System.out.println(code);
         //先判断验证码是不是正确
         //验证码错误，返回一个错误提示信息
         //验证码正确，再验证用户名密码

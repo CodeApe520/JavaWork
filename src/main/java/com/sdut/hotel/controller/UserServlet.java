@@ -101,12 +101,14 @@ public class UserServlet extends HttpServlet {
         String password = req.getParameter("password");
         String email = req.getParameter("email");
         String phone = req.getParameter("phone");
+        String type = req.getParameter("type");
         User user = new User();
         user.setName(name);
         user.setPassword(password);
         user.setEmail(email);
         user.setPhone(phone);
         user.setAvatar("");
+        user.setType(Integer.parseInt(type));
 
         boolean isSuccess = userService.add(user);
         if (isSuccess){

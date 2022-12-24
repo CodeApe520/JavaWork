@@ -28,7 +28,7 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public List<User> selectByPage(UserQuery userQuery) {
-        String sql = "select id,name,password,email,phone,status,gmt_create,gmt_modified from user ";
+        String sql = "select id,name,type,password,email,phone,status,gmt_create,gmt_modified from user ";
 
         //查询参数
         List<Object> args = new ArrayList<>();
@@ -109,8 +109,8 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public Integer add(User user) {
-        String sql = "insert into user(name,password,email,phone,avatar) values(?,?,?,?,?)";
-        int count = jdbcTemplate.update(sql, user.getName(),user.getPassword(),user.getEmail(),user.getPhone(),user.getAvatar());
+        String sql = "insert into user(name,password,email,phone,avatar,type) values(?,?,?,?,?,?)";
+        int count = jdbcTemplate.update(sql, user.getName(),user.getPassword(),user.getEmail(),user.getPhone(),user.getAvatar(),user.getType());
         return count;
     }
 
@@ -134,7 +134,7 @@ public class UserDaoImpl implements IUserDao {
     @Override
     public User login(String name, String password) {
         System.out.println("UserDaoImpl.login");
-        String sql = "select id,name,password,email,phone from user where name=? and password =?";
+        String sql = "select id,name,password,email,phone,type from user where name=? and password =?";
 //        User user = jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<User>(User.class),name,password);
 //        return user;
         List<User> list = jdbcTemplate.query(sql,new BeanPropertyRowMapper<User>(User.class),name,password);

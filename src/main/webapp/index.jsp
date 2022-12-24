@@ -8,7 +8,7 @@
 <body class="layui-layout-body">
 	<div class="layui-layout layui-layout-admin">
 		<div class="layui-header">
-			<div class="layui-logo">JAVA-0000</div>
+			<div class="layui-logo">酒店管理系统</div>
 			<ul class="layui-nav layui-layout-left">   </ul>
 			<ul class="layui-nav layui-layout-right">
 				<li class="layui-nav-item">
@@ -57,12 +57,13 @@
 								data-url="${pageContext.request.contextPath}/dept/dept_list.jsp"
 								class="site-demo-active">部门管理</a>
 							</dd>
-							<dd>
-								<a href="javascript:;"
-								   data-url="${path}/echarts.jsp"
-								   class="site-demo-active">统计图表</a>
-							</dd>
-
+							<c:if test="${user.type == 1}">
+								<dd>
+									<a href="javascript:;"
+									   data-url="${path}/echarts.jsp"
+									   class="site-demo-active">统计图表</a>
+								</dd>
+							</c:if>
 						</dl>
 					</li>
 					<li class="layui-nav-item">
@@ -83,9 +84,9 @@
 				</ul>
 			</div>
 		</div>
-		<div class="layui-body"><!-- 内容主体区域 -->
-			<iframe name="rightframe" width="99%" height="97%" src="${path}/echarts.jsp"></iframe>
-		</div>
+			<div class="layui-body"><!-- 内容主体区域 -->
+				<iframe name="rightframe" width="99%" height="97%" src="${path}/echarts.jsp"></iframe>
+			</div>
 		<div class="layui-footer">© JAVA - 底部固定区域</div>
 	</div>
 	<script type="text/javascript">
