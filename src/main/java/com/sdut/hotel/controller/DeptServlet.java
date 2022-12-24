@@ -1,9 +1,9 @@
 package com.sdut.hotel.controller;
 
-import com.sdut.hotel.pojo.Emp;
-import com.sdut.hotel.pojo.query.EmpQuery;
-import com.sdut.hotel.service.IEmpService;
-import com.sdut.hotel.service.impl.EmpServiceImpl;
+import com.sdut.hotel.pojo.Dept;
+import com.sdut.hotel.pojo.query.DeptQuery;
+import com.sdut.hotel.service.IDeptService;
+import com.sdut.hotel.service.impl.DeptServiceImpl;
 import com.sdut.hotel.utils.JSONResult;
 import com.sdut.hotel.utils.JSONUtil;
 import com.sdut.hotel.utils.LayUITableResult;
@@ -18,17 +18,17 @@ import java.util.List;
 
 //Create by IntelliJ IDEA.
 //Have a good day!
-//Emp: jiruichang
+//Dept: jiruichang
 //Date: 2022/12/20
 //Time: 10:47
-@WebServlet("/emp")
-public class EmpServlet extends HttpServlet {
+@WebServlet("/dept")
+public class DeptServlet extends HttpServlet {
 
-    private IEmpService empService = new EmpServiceImpl();
+    private IDeptService deptService = new DeptServiceImpl();
 
     //http://localhost:8081/hotel/?method
     //http://localhost:8081/hotel/?deleteById&id=1
-    // /hotel/emp?method=selectByPage&page=1&limit=10&name=&email=&phone=
+    // /hotel/dept?method=selectByPage&page=1&limit=10&name=&email=&phone=
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        req.setCharacterEncoding("utf-8");
@@ -49,8 +49,8 @@ public class EmpServlet extends HttpServlet {
             case "add":
                 add(req,resp);
                 break;
-            case "getEmpUpdatePage":
-                getEmpUpdatePage(req,resp);
+            case "getDeptUpdatePage":
+                getDeptUpdatePage(req,resp);
                 break;
             case "update":
                 update(req,resp);
@@ -63,21 +63,16 @@ public class EmpServlet extends HttpServlet {
     }
 
     private void update(HttpServletRequest req, HttpServletResponse resp) {
-        System.out.println("EmpServlet.update");
+        System.out.println("DeptServlet.update");
         String id = req.getParameter("id");
-        System.out.println("EmpServlet.add");
+        System.out.println("DeptServlet.add");
         String name = req.getParameter("name");
-        String deptId = req.getParameter("deptId");
-        String email = req.getParameter("email");
-        String phone = req.getParameter("phone");
-        Emp emp = new Emp();
-        emp.setId(Integer.parseInt(id));
-        emp.setName(name);
-        emp.setDepId(Integer.parseInt(deptId));
-        emp.setEmail(email);
-        emp.setPhone(phone);
-
-        boolean isSuccess = empService.update(emp);
+        String addr = req.getParameter("addr");
+        Dept dept = new Dept();
+        dept.setId(Integer.parseInt(id));
+        dept.setName(name);
+        dept.setAddr(addr);
+        boolean isSuccess = deptService.update(dept);
         if (isSuccess){
             JSONUtil.obj2Json(JSONResult.ok("修改成功"),resp);
         }else {
@@ -85,27 +80,23 @@ public class EmpServlet extends HttpServlet {
         }
     }
 
-    private void getEmpUpdatePage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("EmpServlet.getEmpUpdatePage");
+    private void getDeptUpdatePage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("DeptServlet.getDeptUpdatePage");
         String id = req.getParameter("id");
-        Emp emp = empService.selectById(Integer.parseInt(id));
-        req.setAttribute("emp",emp);
-        req.getRequestDispatcher("/emp/emp_update.jsp").forward(req,resp);
+        Dept dept = deptService.selectById(Integer.parseInt(id));
+        req.setAttribute("dept",dept);
+        req.getRequestDispatcher("/dept/dept_update.jsp").forward(req,resp);
     }
 
     private void add(HttpServletRequest req, HttpServletResponse resp) {
-        System.out.println("EmpServlet.add");
+        System.out.println("DeptServlet.add");
         String name = req.getParameter("name");
-        String deptId = req.getParameter("deptId");
-        String email = req.getParameter("email");
-        String phone = req.getParameter("phone");
-        Emp emp = new Emp();
-        emp.setName(name);
-        emp.setDepId(Integer.parseInt(deptId));
-        emp.setEmail(email);
-        emp.setPhone(phone);
+        String addr = req.getParameter("addr");
+        Dept dept = new Dept();
+        dept.setName(name);
+        dept.setAddr(addr);
 
-        boolean isSuccess = empService.add(emp);
+        boolean isSuccess = deptService.add(dept);
         if (isSuccess){
             JSONUtil.obj2Json(JSONResult.ok("添加成功"),resp);
         }else {
@@ -114,11 +105,11 @@ public class EmpServlet extends HttpServlet {
     }
 
     private void deleteAll(HttpServletRequest req, HttpServletResponse resp) {
-        System.out.println("EmpServlet.selectByAll");
+        System.out.println("DeptServlet.selectByAll");
         //"14，15"
         String ids = req.getParameter("ids");
         String[] array = ids.split(",");
-        boolean isSuccess = empService.deleteAll(array);
+        boolean isSuccess = deptService.deleteAll(array);
 
         if (isSuccess){
             JSONUtil.obj2Json(JSONResult.ok("删除成功"),resp);
@@ -127,19 +118,20 @@ public class EmpServlet extends HttpServlet {
         }
     }
 
-    //https://www.layuiweb.com/demo/table/emp/-page=1&limit=30.js?page=1&limit=10
-    ///emp?method=selectById&page=1&limit=10
+    //https://www.layuiweb.com/demo/table/dept/-page=1&limit=30.js?page=1&limit=10
+    ///dept?method=selectById&page=1&limit=10
     private void selectByPage(HttpServletRequest req, HttpServletResponse resp) {
-        System.out.println("EmpServlet.selectByPage");
+        System.out.println("DeptServlet.selectByPage");
         int page = Integer.parseInt(req.getParameter("page"));
         int limit = Integer.parseInt(req.getParameter("limit"));
         String name = req.getParameter("name");
-        String email = req.getParameter("email");
-        String phone = req.getParameter("phone");
+        String addr = req.getParameter("addr");
+        System.out.println(addr);
+        System.out.println(name);
 
-        EmpQuery empQuery = new EmpQuery(page,limit,name,email,phone);
+        DeptQuery deptQuery = new DeptQuery(page,limit,name,addr);
 
-        LayUITableResult layUITableResult = empService.selectByPage(empQuery);
+        LayUITableResult layUITableResult = deptService.selectByPage(deptQuery);
         JSONUtil.obj2Json(layUITableResult,resp);
 
     }
@@ -147,11 +139,11 @@ public class EmpServlet extends HttpServlet {
 
 
     private void deleteById(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        System.out.println("EmpServlet.deleteById");
+        System.out.println("DeptServlet.deleteById");
         String id = req.getParameter("id");
-        boolean isSuccess = empService.deleteById(Integer.parseInt(id));
-        //删除完了之后应该重定向查找所有界面  /hotel/emp?method=selectAll
-//        resp.sendRedirect(req.getContextPath() + "/emp?method=selectAll");
+        boolean isSuccess = deptService.deleteById(Integer.parseInt(id));
+        //删除完了之后应该重定向查找所有界面  /hotel/dept?method=selectAll
+//        resp.sendRedirect(req.getContextPath() + "/dept?method=selectAll");
         if (isSuccess){
             JSONUtil.obj2Json(JSONResult.ok("删除成功"),resp);
         }else {
@@ -163,11 +155,11 @@ public class EmpServlet extends HttpServlet {
     }
 
     private void selectAll(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("EmpServlet.selectAll");
-        List<Emp> list = empService.selectAll();
+        System.out.println("DeptServlet.selectAll");
+        List<Dept> list = deptService.selectAll();
         // 把数据放到req这个域对象
         req.setAttribute("list",list);
-        // 转发到emp_list.jsp页面进行展示
-        req.getRequestDispatcher("/emp_list.jsp").forward(req,resp);
+        // 转发到dept_list.jsp页面进行展示
+        req.getRequestDispatcher("/dept_list.jsp").forward(req,resp);
     }
 }

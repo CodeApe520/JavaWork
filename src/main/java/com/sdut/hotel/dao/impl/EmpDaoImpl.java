@@ -106,7 +106,7 @@ public class EmpDaoImpl implements IEmpDao {
     public Integer add(Emp emp) {
         System.out.println("EmpDaoImpl.add");
         String sql = "insert into emp(name,dept_id,email,phone) values(?,?,?,?)";
-        int count = jdbcTemplate.update(sql, emp.getName(),emp.getDeptId(),emp.getEmail(),emp.getPhone());
+        int count = jdbcTemplate.update(sql, emp.getName(),emp.getDepId(),emp.getEmail(),emp.getPhone());
         return count;
     }
 
@@ -124,7 +124,7 @@ public class EmpDaoImpl implements IEmpDao {
     @Override
     public Integer update(Emp emp) {
         String sql = "update emp set name=?,dept_id=?,email=?,phone=? where id=?";
-        int count = jdbcTemplate.update(sql, emp.getName(),emp.getDeptId(),emp.getEmail(),emp.getPhone(),emp.getId());
+        int count = jdbcTemplate.update(sql, emp.getName(),emp.getDepId(),emp.getEmail(),emp.getPhone(),emp.getId());
         return count;    }
 
 }
