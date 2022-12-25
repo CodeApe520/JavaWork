@@ -14,22 +14,28 @@
 <body>
 <%--    右侧工具条--%>
     <script type="text/html" id="barDemo">
+<c:if test="${user.type == 1}">
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</c:if>
     </script>
 <%--    顶部工具条--%>
     <script type="text/html" id="toolbarDemo">
+
         <div class="layui-btn-container">
+            <c:if test="${user.type == 1}">
             <button class="layui-btn layui-btn-sm"  lay-event="add">添加</button>
             <button class="layui-btn layui-btn-sm" lay-event="deleteAll">批量删除</button>
+            </c:if>
         </div>
     </script>
+
     <div class="demoTable">
-        搜索名字：
+        学院：
         <div class="layui-inline">
             <input class="layui-input" name="name" id="nameId" autocomplete="off">
         </div>
-        搜索地址：
+        监考地点：
         <div class="layui-inline">
             <input class="layui-input" name="addr" id="addrId" autocomplete="off">
         </div>
@@ -51,8 +57,8 @@
                 ,cols: [[
                     {checkbox: true, fixed: true}
                     ,{field:'id', title: 'ID', sort: true, fixed: true}
-                    ,{field:'name', title: '部门名'}
-                    ,{field:'addr', title: '地址'}
+                    ,{field:'name', title: '学院名称'}
+                    ,{field:'addr', title: '监考范围'}
                     ,{field:'', title: '操作', toolbar :'#barDemo'}
                 ]]
                 ,id: 'tableId'
@@ -75,7 +81,7 @@
                     case 'deleteAll':
 
                         var data = checkStatus.data;
-                        // {avatar: '', deleted: 0, email: '123', gmtCreate: null, gmtModified: null, …}, {…}, {…}, {…}, {…}, {…}]
+                        // {avatar: '', deleted: 0, loc: '123', gmtCreate: null, gmtModified: null, …}, {…}, {…}, {…}, {…}, {…}]
                         layer.msg('选中了：'+ data.length + ' 个');
                         var idArray = new Array();
                         for (var i = 0; i < data.length; i++) {
@@ -183,7 +189,7 @@
 <%--            <td>名字</td>--%>
 <%--            <td>密码</td>--%>
 <%--            <td>邮箱</td>--%>
-<%--            <td>电话</td>--%>
+<%--            <td>考试科目</td>--%>
 <%--            <td>删除</td>--%>
 <%--        </tr>--%>
 <%--        <c:forEach items="${list}" var="dept">--%>
@@ -191,7 +197,7 @@
 <%--                <td>${dept.id}</td>--%>
 <%--                <td>${dept.name}</td>--%>
 <%--                <td>${dept.password}</td>--%>
-<%--                <td>${dept.email}</td>--%>
+<%--                <td>${dept.loc}</td>--%>
 <%--                <td>${dept.phone}</td>--%>
 <%--&lt;%&ndash;                <td><a href="${path}/dept?method=deleteById&id=${dept.id}">删除</a> </td>&ndash;%&gt;--%>
 <%--                <td><a href="javascript:deleteById(${dept.id})">删除</a> </td>--%>

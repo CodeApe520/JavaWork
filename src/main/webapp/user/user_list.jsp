@@ -14,26 +14,26 @@
 <body>
 <%--右侧工具条--%>
 <script type="text/html" id="barDemo">
-    <%-- <c:if test="${user.type==1}">--%>
+    <c:if test="${user.type == 1}">
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-    <%--</c:if>--%>
+    </c:if>
 </script>
 <%--顶部工具条--%>
 <script type="text/html" id="toolbarDemo">
-    <%-- <c:if test="${user.type==1}">--%>
+    <c:if test="${user.type == 1}">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
         <button class="layui-btn layui-btn-sm" lay-event="deleteAll">批量删除</button>
     </div>
-    <%--</c:if>--%>
+    </c:if>
 </script>
 
 <script type="text/html" id="typeTemplet">
     {{#     if (d.type==1) {            }}
-    <span class="layui-badge layui-bg-orange">超级管理员</span>
+    <span class="layui-badge layui-bg-orange">管理员</span>
     {{#     } else if (d.type==2) {     }}
-    <span class="layui-badge layui-bg-green">普通管理员</span>
+    <span class="layui-badge layui-bg-green">教师</span>
     {{#     }                           }}
 </script>
 
@@ -43,13 +43,13 @@
 </script>
 
 <div class="demoTable">
-    搜索名字：
+    姓名：
     <div class="layui-inline">
         <input class="layui-input" name="name" id="nameId" autocomplete="off">
     </div>
-    邮箱：
+    监考地点：
     <div class="layui-inline">
-        <input class="layui-input" name="email" id="emailId" autocomplete="off">
+        <input class="layui-input" name="loc" id="locId" autocomplete="off">
     </div>
     手机：
     <div class="layui-inline">
@@ -58,9 +58,9 @@
     管理员:
     <div class="layui-inline">
         <select id="typeId" name="type">
-            <option value="">--管理员类型--</option>
-            <option value="1">超级管理员</option>
-            <option value="2">普通管理员</option>
+            <option value="">--类型--</option>
+            <option value="1">管理员</option>
+            <option value="2">教师</option>
         </select>
     </div>
     开始时间
@@ -99,14 +99,14 @@
             ,cols: [[
                 {checkbox: true, fixed: true}
                 ,{field:'id', title: 'ID', sort: true}
-                ,{field:'name', title: '用户名'}
+                ,{field:'name', title: '监考员姓名'}
                 ,{field:'type', title: '管理员类型',templet: '#typeTemplet'}
                 ,{field:'password', title: '密码'}
-                ,{field:'email', title: '邮箱'}
-                ,{field:'phone', title: '电话'}
+                ,{field:'phone', title: '考试科目'}
+                ,{field:'loc', title: '监考地点'}
                 ,{field:'status', title: '状态',templet: '#statusTemplet'}
-                ,{field:'gmtCreate', title: '创建时间',templet:"<div>{{!d.gmtCreate.time?'':layui.util.toDateString(d.gmtCreate.time, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
-                ,{field:'gmtModified', title: '更新时间',templet:"<div>{{!d.gmtModified.time?'':layui.util.toDateString(d.gmtModified.time, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
+                ,{field:'gmtCreate', title: '开始时间',templet:"<div>{{!d.gmtCreate.time?'':layui.util.toDateString(d.gmtCreate.time, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
+                ,{field:'gmtModified', title: '结束时间',templet:"<div>{{!d.gmtModified.time?'':layui.util.toDateString(d.gmtModified.time, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
                 ,{field:'', title: '操作', toolbar: '#barDemo'}
             ]]
             ,id: 'tableId'
@@ -147,7 +147,7 @@
                     break;
                 case 'deleteAll':
                     var data = checkStatus.data;
-                    //[{avatar: '', deleted: 0, email: '12', gmtCreate: null, gmtModified: null, …}, {avatar: '', deleted: 0, email: '13', gmtCreate: null, gmtModified: null, …}]
+                    //[{avatar: '', deleted: 0, loc: '12', gmtCreate: null, gmtModified: null, …}, {avatar: '', deleted: 0, loc: '13', gmtCreate: null, gmtModified: null, …}]
                     layer.msg('选中了：'+ data.length + ' 个');
                     var idArray = new Array();
                     for (var i = 0; i < data.length; i++) {
@@ -230,7 +230,7 @@
                     }
                     ,where: {
                         name: $('#nameId').val(),
-                        email: $('#emailId').val(),
+                        loc: $('#locId').val(),
                         phone: $('#phoneId').val(),
                         type: $('#typeId').val(),
                         beginDate: $('#beginDateId').val(),
@@ -259,7 +259,7 @@
             <td>名字</td>
             <td>密码</td>
             <td>邮箱</td>
-            <td>电话</td>
+            <td>考试科目</td>
             <td>删除</td>
         </tr>
         <c:forEach items="${list}" var="user">
@@ -267,7 +267,7 @@
                 <td>${user.id}</td>
                 <td>${user.name}</td>
                 <td>${user.password}</td>
-                <td>${user.email}</td>
+                <td>${user.loc}</td>
                 <td>${user.phone}</td>
                 &lt;%&ndash;<td><a href="${path}/user?method=deleteById&id=${user.id}">删除</a></td>&ndash;%&gt;
                 <td><a href="javascript:deleteById(${user.id})">删除</a></td>

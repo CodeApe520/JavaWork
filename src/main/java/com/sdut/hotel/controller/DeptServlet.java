@@ -28,7 +28,7 @@ public class DeptServlet extends HttpServlet {
 
     //http://localhost:8081/hotel/?method
     //http://localhost:8081/hotel/?deleteById&id=1
-    // /hotel/dept?method=selectByPage&page=1&limit=10&name=&email=&phone=
+    // /hotel/dept?method=selectByPage&page=1&limit=10&name=&loc=&phone=
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        req.setCharacterEncoding("utf-8");

@@ -22,14 +22,14 @@ public class EmpDaoImpl implements IEmpDao {
     private JdbcTemplate jdbcTemplate = new JdbcTemplate(JDBCUtil.getDataSource());
     @Override
     public List<Emp> selectAll() {
-        String sql = "select id,name,dept_id,email,phone from emp";
+        String sql = "select id,name,dept_id,loc,phone from emp";
         List<Emp> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Emp>(Emp.class));
         return list;
     }
 
     @Override
     public List<EmpDeptVO> selectByPage(EmpQuery empQuery) {
-        String sql = "SELECT e.id,e.name,e.email,e.phone,d.id as deptId, d.name as deptName\n" +
+        String sql = "SELECT e.id,e.name,e.loc,e.phone,d.id as deptId, d.name as deptName\n" +
                 "from emp As e INNER JOIN dept AS d \n" +
                 "on e.dept_id=d.id ";
 
@@ -37,12 +37,12 @@ public class EmpDaoImpl implements IEmpDao {
         List<Object> args = new ArrayList<>();
         String where = "where 1=1 ";
         if (!StringUtils.isEmpty(empQuery.getName())){
-            where += "and name like ?";
+            where += "and e.name like BINARY ?";
             args.add("%"+empQuery.getName() +"%");
         }
-        if (!StringUtils.isEmpty(empQuery.getEmail())){
-            where += "and email=?";
-            args.add(empQuery.getEmail());
+        if (!StringUtils.isEmpty(empQuery.getLoc())){
+            where += "and loc=?";
+            args.add(empQuery.getLoc());
         }
         if (!StringUtils.isEmpty(empQuery.getPhone())){
             where += "and phone=?";
@@ -70,9 +70,9 @@ public class EmpDaoImpl implements IEmpDao {
             where += "and name like ?";
             args.add("%"+empQuery.getName() +"%");
         }
-        if (!StringUtils.isEmpty(empQuery.getEmail())){
-            where += "and email=?";
-            args.add(empQuery.getEmail());
+        if (!StringUtils.isEmpty(empQuery.getLoc())){
+            where += "and loc=?";
+            args.add(empQuery.getLoc());
         }
         if (!StringUtils.isEmpty(empQuery.getName())){
             where += "and phone=?";
@@ -108,14 +108,14 @@ public class EmpDaoImpl implements IEmpDao {
     @Override
     public Integer add(Emp emp) {
         System.out.println("EmpDaoImpl.add");
-        String sql = "insert into emp(name,dept_id,email,phone) values(?,?,?,?)";
-        int count = jdbcTemplate.update(sql, emp.getName(),emp.getDeptId(),emp.getEmail(),emp.getPhone());
+        String sql = "insert into emp(name,dept_id,loc,phone) values(?,?,?,?)";
+        int count = jdbcTemplate.update(sql, emp.getName(),emp.getDeptId(),emp.getLoc(),emp.getPhone());
         return count;
     }
 
     @Override
     public Emp selectById(int id) {
-        String sql = "select id,`name`,dept_id,email,phone from emp where id=?";
+        String sql = "select id,`name`,dept_id,loc,phone from emp where id=?";
         //Emp emp = jdbcTemplate.queryForObject(sql, Emp.class, id);
         List<Emp> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(Emp.class), id);
         if (CollectionUtils.isEmpty(list)){
@@ -126,8 +126,8 @@ public class EmpDaoImpl implements IEmpDao {
 
     @Override
     public Integer update(Emp emp) {
-        String sql = "update emp set name=?,dept_id=?,email=?,phone=? where id=?";
-        int count = jdbcTemplate.update(sql, emp.getName(),emp.getDeptId(),emp.getEmail(),emp.getPhone(),emp.getId());
+        String sql = "update emp set name=?,dept_id=?,loc=?,phone=? where id=?";
+        int count = jdbcTemplate.update(sql, emp.getName(),emp.getDeptId(),emp.getLoc(),emp.getPhone(),emp.getId());
         return count;    }
 
 }

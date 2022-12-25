@@ -14,15 +14,15 @@
 <body>
     <form id = "formId" class="layui-form layui-form-pane" action="">
         <div class="layui-form-item">
-            <label class="layui-form-label">部门名</label>
+            <label class="layui-form-label">学院名称</label>
             <div class="layui-input-block">
-                <input type="text" name="name" autocomplete="off" placeholder="请输入部门名" class="layui-input">
+                <input type="text" name="name" autocomplete="off" placeholder="请输入学院名称" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">部门地址</label>
+            <label class="layui-form-label">监考地点</label>
             <div class="layui-input-block">
-                <input type="text" name="addr" lay-verify="required" placeholder="请输入部门地址" autocomplete="off" class="layui-input">
+                <input type="text" name="addr" lay-verify="required" placeholder="请输入地点" autocomplete="off" class="layui-input">
             </div>
         </div>
 

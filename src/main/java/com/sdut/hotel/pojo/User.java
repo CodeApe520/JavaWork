@@ -18,7 +18,7 @@ public class User {
     private Integer id;
     private String name;
     private String password;
-    private String email;
+    private String loc;
     private String phone;
     private String avatar;
     private Integer status;

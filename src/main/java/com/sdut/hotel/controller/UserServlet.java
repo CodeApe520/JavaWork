@@ -30,7 +30,7 @@ public class UserServlet extends HttpServlet {
 
     //http://localhost:8081/hotel/?method
     //http://localhost:8081/hotel/?deleteById&id=1
-    // /hotel/user?method=selectByPage&page=1&limit=10&name=&email=&phone=
+    // /hotel/user?method=selectByPage&page=1&limit=10&name=&loc=&phone=
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        req.setCharacterEncoding("utf-8");
@@ -84,13 +84,13 @@ public class UserServlet extends HttpServlet {
         System.out.println("UserServlet.add");
         String name = req.getParameter("name");
         String password = req.getParameter("password");
-        String email = req.getParameter("email");
+        String loc = req.getParameter("loc");
         String phone = req.getParameter("phone");
         User user = new User();
         user.setId(Integer.parseInt(id));
         user.setName(name);
         user.setPassword(password);
-        user.setEmail(email);
+        user.setLoc(loc);
         user.setPhone(phone);
         user.setAvatar("");
 
@@ -114,13 +114,13 @@ public class UserServlet extends HttpServlet {
         System.out.println("UserServlet.add");
         String name = req.getParameter("name");
         String password = req.getParameter("password");
-        String email = req.getParameter("email");
+        String loc = req.getParameter("loc");
         String phone = req.getParameter("phone");
         String type = req.getParameter("type");
         User user = new User();
         user.setName(name);
         user.setPassword(password);
-        user.setEmail(email);
+        user.setLoc(loc);
         user.setPhone(phone);
         user.setAvatar("");
         user.setType(Integer.parseInt(type));
@@ -154,7 +154,7 @@ public class UserServlet extends HttpServlet {
         int page = Integer.parseInt(req.getParameter("page"));
         int limit = Integer.parseInt(req.getParameter("limit"));
         String name = req.getParameter("name");
-        String email = req.getParameter("email");
+        String loc = req.getParameter("loc");
         String phone = req.getParameter("phone");
         String typeStr = req.getParameter("type");
         Integer type = null;
@@ -164,7 +164,7 @@ public class UserServlet extends HttpServlet {
         String beginDate = req.getParameter("beginDate");
         String endDate = req.getParameter("endDate");
 
-        UserQuery userQuery = new UserQuery(page,limit,name,email,phone,type, DateUtil.parse(beginDate),DateUtil.parse(endDate));
+        UserQuery userQuery = new UserQuery(page,limit,name,loc,phone,type, DateUtil.parse(beginDate),DateUtil.parse(endDate));
 
 
         LayUITableResult layUITableResult = userService.selectByPage(userQuery);

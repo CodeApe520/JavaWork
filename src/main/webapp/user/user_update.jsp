@@ -33,17 +33,18 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">邮箱</label>
+            <label class="layui-form-label">监考地点</label>
             <div class="layui-input-block">
-                <input type="text" name="email" value="${user.email}" lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+                <input type="text" name="loc" value="${user.loc}" lay-verify="required" placeholder="请输入监考地点" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">电话</label>
+            <label class="layui-form-label">考试科目</label>
             <div class="layui-input-block">
-                <input type="text" name="phone" value="${user.phone}" lay-verify="required" placeholder="请输入电话" autocomplete="off" class="layui-input">
+                <input type="text" name="phone" value="${user.phone}" lay-verify="required" placeholder="请输入考试科目" autocomplete="off" class="layui-input">
             </div>
         </div>
+
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" type="button" onclick="submitForm()">修改</button>

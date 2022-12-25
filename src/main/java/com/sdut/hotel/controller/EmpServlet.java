@@ -31,7 +31,7 @@ public class EmpServlet extends HttpServlet {
 
     //http://localhost:8081/hotel/?method
     //http://localhost:8081/hotel/?deleteById&id=1
-    // /hotel/emp?method=selectByPage&page=1&limit=10&name=&email=&phone=
+    // /hotel/emp?method=selectByPage&page=1&limit=10&name=&loc=&phone=
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        req.setCharacterEncoding("utf-8");
@@ -80,13 +80,13 @@ public class EmpServlet extends HttpServlet {
         System.out.println("EmpServlet.add");
         String name = req.getParameter("name");
         String deptId = req.getParameter("deptId");
-        String email = req.getParameter("email");
+        String loc = req.getParameter("loc");
         String phone = req.getParameter("phone");
         Emp emp = new Emp();
         emp.setId(Integer.parseInt(id));
         emp.setName(name);
         emp.setDeptId(Integer.parseInt(deptId));
-        emp.setEmail(email);
+        emp.setLoc(loc);
         emp.setPhone(phone);
 
         boolean isSuccess = empService.update(emp);
@@ -109,12 +109,12 @@ public class EmpServlet extends HttpServlet {
         System.out.println("EmpServlet.add");
         String name = req.getParameter("name");
         String deptId = req.getParameter("deptId");
-        String email = req.getParameter("email");
+        String loc = req.getParameter("loc");
         String phone = req.getParameter("phone");
         Emp emp = new Emp();
         emp.setName(name);
         emp.setDeptId(Integer.parseInt(deptId));
-        emp.setEmail(email);
+        emp.setLoc(loc);
         emp.setPhone(phone);
 
         boolean isSuccess = empService.add(emp);
@@ -146,10 +146,10 @@ public class EmpServlet extends HttpServlet {
         int page = Integer.parseInt(req.getParameter("page"));
         int limit = Integer.parseInt(req.getParameter("limit"));
         String name = req.getParameter("name");
-        String email = req.getParameter("email");
+        String loc = req.getParameter("loc");
         String phone = req.getParameter("phone");
 
-        EmpQuery empQuery = new EmpQuery(page,limit,name,email,phone);
+        EmpQuery empQuery = new EmpQuery(page,limit,name,loc,phone);
 
         LayUITableResult layUITableResult = empService.selectByPage(empQuery);
         JSONUtil.obj2Json(layUITableResult,resp);

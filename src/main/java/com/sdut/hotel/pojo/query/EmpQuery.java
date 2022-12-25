@@ -14,6 +14,6 @@ public class EmpQuery {
     private Integer  page ;
     private Integer  limit ;
     private String  name ;
-    private String  email ;
+    private String  loc ;
     private String  phone ;
 }

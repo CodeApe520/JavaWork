@@ -39,11 +39,11 @@
             // 指定图表的配置项和数据
             var option1 = {
                 title: {
-                    text: 'ECharts 入门示例'
+                    text: '学校监考分布'
                 },
                 tooltip: {},
                 legend: {
-                    data: ['销量']
+                    data: ['监考分布']
                 },
                 xAxis: {
                     data: xArray
@@ -51,7 +51,7 @@
                 yAxis: {},
                 series: [
                     {
-                        name: '销量',
+                        name: '监考分布',
                         type: 'bar',
                         data: yArray
                     }
@@ -63,8 +63,7 @@
             //饼状图
             var option2 = {
                 title: {
-                    text: 'Referer of a Website',
-                    subtext: 'Fake Data',
+                    text: '学校监考分布',
                     left: 'center'
                 },
                 tooltip: {

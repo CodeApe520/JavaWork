@@ -8,7 +8,7 @@
 <body class="layui-layout-body">
 	<div class="layui-layout layui-layout-admin">
 		<div class="layui-header">
-			<div class="layui-logo">酒店管理系统</div>
+			<div class="layui-logo">监考管理查询系统</div>
 			<ul class="layui-nav layui-layout-left">   </ul>
 			<ul class="layui-nav layui-layout-right">
 				<li class="layui-nav-item">
@@ -18,17 +18,17 @@
 				        	用户: ${user.name}
 <%-- 				        	[${user.name}] --%>
 				    </a>
-					<dl class="layui-nav-child">
-						<dd>
-							<a href="javascript:openUser()">基本资料</a>
-						</dd>
-						<dd>
-							<a href="javascript:openPass()">修改密码</a>
-						</dd>
-						<dd>
-                            <a href="javascript:openPic()">修改头像</a>
-                        </dd>
-					</dl>
+<%--					<dl class="layui-nav-child">--%>
+<%--						<dd>--%>
+<%--							<a href="javascript:openUser()">基本资料</a>--%>
+<%--						</dd>--%>
+<%--						<dd>--%>
+<%--							<a href="javascript:openPass()">修改密码</a>--%>
+<%--						</dd>--%>
+<%--						<dd>--%>
+<%--                            <a href="javascript:openPic()">修改头像</a>--%>
+<%--                        </dd>--%>
+<%--					</dl>--%>
 				</li>
 				<li class="layui-nav-item">
 				    <a href="javascript:logout()">注销</a>
@@ -42,20 +42,22 @@
 					<li class="layui-nav-item layui-nav-itemed">
 					    <a href="javascript:;">信息维护</a>
 						<dl class="layui-nav-child">
+							<c:if test="${user.type == 1}">
 							<dd>
 								<a href="javascript:;" 
 								data-url="${pageContext.request.contextPath}/user/user_list.jsp"
 								class="site-demo-active">管理员管理</a>
 							</dd>
+							</c:if>
 							<dd>
 								<a href="javascript:;" 
 								data-url="${pageContext.request.contextPath}/emp/emp_list.jsp"
-								class="site-demo-active">员工管理</a>
+								class="site-demo-active">监考老师安排</a>
 							</dd>
 							<dd>
 								<a href="javascript:;" 
 								data-url="${pageContext.request.contextPath}/dept/dept_list.jsp"
-								class="site-demo-active">部门管理</a>
+								class="site-demo-active">学院监考安排</a>
 							</dd>
 							<c:if test="${user.type == 1}">
 								<dd>
@@ -66,28 +68,28 @@
 							</c:if>
 						</dl>
 					</li>
-					<li class="layui-nav-item">
-					    <a href="javascript:;">基础配置</a>
-						<dl class="layui-nav-child">
-							<dd>
-								<a href="javascript:;" 
-								class="site-demo-active" 
-								data-url="/web/page/dict/dictlist.jsp">
-								基础数据维护</a>
-							</dd>
-							<dd>
-								<a href="javascript:;" class="site-demo-active" 
-								data-url="/web/404.jsp">404-1</a>
-							</dd>
-						</dl>
-					</li>
+<%--					<li class="layui-nav-item">--%>
+<%--					    <a href="javascript:;">基础配置</a>--%>
+<%--						<dl class="layui-nav-child">--%>
+<%--							<dd>--%>
+<%--								<a href="javascript:;"--%>
+<%--								class="site-demo-active"--%>
+<%--								data-url="/web/page/dict/dictlist.jsp">--%>
+<%--								基础数据维护</a>--%>
+<%--							</dd>--%>
+<%--							<dd>--%>
+<%--								<a href="javascript:;" class="site-demo-active"--%>
+<%--								data-url="/web/404.jsp">404-1</a>--%>
+<%--							</dd>--%>
+<%--						</dl>--%>
+<%--					</li>--%>
 				</ul>
 			</div>
 		</div>
 			<div class="layui-body"><!-- 内容主体区域 -->
-				<iframe name="rightframe" width="99%" height="97%" src="${path}/echarts.jsp"></iframe>
+				<iframe name="rightframe" width="99%" height="97%" src="${path}/emp/emp_list.jsp"></iframe>
 			</div>
-		<div class="layui-footer">© JAVA - 底部固定区域</div>
+		<div class="layui-footer">© 监考管理查询系统</div>
 	</div>
 	<script type="text/javascript">
 		var $ = layui.jquery;

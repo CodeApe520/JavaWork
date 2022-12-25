@@ -13,7 +13,7 @@ import java.util.Date;
 public class Emp {
     private Integer id;
     private String name;
-    private String email;
+    private String loc;
     private String phone;
     //所在部门id
     private Integer deptId;

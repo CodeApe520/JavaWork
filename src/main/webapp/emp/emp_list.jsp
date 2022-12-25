@@ -14,26 +14,30 @@
 <body>
 <%--    右侧工具条--%>
     <script type="text/html" id="barDemo">
+<c:if test="${user.type == 1}">
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </c:if>
     </script>
 <%--    顶部工具条--%>
     <script type="text/html" id="toolbarDemo">
+<c:if test="${user.type == 1}">
         <div class="layui-btn-container">
             <button class="layui-btn layui-btn-sm"  lay-event="add">添加</button>
             <button class="layui-btn layui-btn-sm" lay-event="deleteAll">批量删除</button>
         </div>
+    </c:if>
     </script>
     <div class="demoTable">
-        搜索名字：
+        姓名：
         <div class="layui-inline">
             <input class="layui-input" name="name" id="nameId" autocomplete="off">
         </div>
-        搜索邮箱：
+        监考地点：
         <div class="layui-inline">
-            <input class="layui-input" name="email" id="emailId" autocomplete="off">
+            <input class="layui-input" name="loc" id="locId" autocomplete="off">
         </div>
-        搜索手机：
+        考试科目：
         <div class="layui-inline">
             <input class="layui-input" name="phone" id="phoneId" autocomplete="off">
         </div>
@@ -55,11 +59,11 @@
                 ,cols: [[
                     {checkbox: true, fixed: true}
                     ,{field:'id', title: 'ID', sort: true, fixed: true}
-                    ,{field:'name', title: '用户名'}
-                    ,{field:'email', title: '邮箱'}
-                    ,{field:'phone', title: '电话'}
-                    ,{field:'deptId', title: '部门ID'}
-                    ,{field:'deptName', title: '部门名字'}
+                    ,{field:'name', title: '监考员姓名'}
+                    ,{field:'phone', title: '考试科目'}
+                    ,{field:'loc', title: '监考地点'}
+                    ,{field:'deptId', title: '学院编号'}
+                    ,{field:'deptName', title: '学院名称'}
                     ,{field:'', title: '操作', toolbar :'#barDemo'}
                 ]]
                 ,id: 'tableId'
@@ -82,7 +86,7 @@
                     case 'deleteAll':
 
                         var data = checkStatus.data;
-                        // {avatar: '', deleted: 0, email: '123', gmtCreate: null, gmtModified: null, …}, {…}, {…}, {…}, {…}, {…}]
+                        // {avatar: '', deleted: 0, loc: '123', gmtCreate: null, gmtModified: null, …}, {…}, {…}, {…}, {…}, {…}]
                         layer.msg('选中了：'+ data.length + ' 个');
                         var idArray = new Array();
                         for (var i = 0; i < data.length; i++) {
@@ -168,7 +172,7 @@
                         }
                         ,where: {
                            name : $('#nameId').val(),
-                           email : $('#emailId').val(),
+                           loc : $('#locId').val(),
                            phone : $('#phoneId').val(),
                         }
                     });
@@ -191,7 +195,7 @@
 <%--            <td>名字</td>--%>
 <%--            <td>密码</td>--%>
 <%--            <td>邮箱</td>--%>
-<%--            <td>电话</td>--%>
+<%--            <td>考试科目</td>--%>
 <%--            <td>删除</td>--%>
 <%--        </tr>--%>
 <%--        <c:forEach items="${list}" var="emp">--%>
@@ -199,7 +203,7 @@
 <%--                <td>${emp.id}</td>--%>
 <%--                <td>${emp.name}</td>--%>
 <%--                <td>${emp.password}</td>--%>
-<%--                <td>${emp.email}</td>--%>
+<%--                <td>${emp.loc}</td>--%>
 <%--                <td>${emp.phone}</td>--%>
 <%--&lt;%&ndash;                <td><a href="${path}/emp?method=deleteById&id=${emp.id}">删除</a> </td>&ndash;%&gt;--%>
 <%--                <td><a href="javascript:deleteById(${emp.id})">删除</a> </td>--%>

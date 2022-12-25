@@ -15,31 +15,26 @@
     <form id = "formId" class="layui-form layui-form-pane" action="">
         <input type="hidden" name="id" value="${emp.id}" readonly>
         <div class="layui-form-item">
-            <label class="layui-form-label">用户名</label>
+            <label class="layui-form-label">姓名</label>
             <div class="layui-input-block">
-                <input type="text" name="name" value="${emp.name}" autocomplete="off" placeholder="请输入用户名" class="layui-input">
+                <input type="text" name="name" value="${emp.name}" autocomplete="off" placeholder="请输入姓名" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">邮箱</label>
+            <label class="layui-form-label">考试科目</label>
             <div class="layui-input-block">
-                <input type="text" name="email" value="${emp.email}" lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+                <input type="text" name="phone" value="${emp.phone}" lay-verify="required" placeholder="请输入考试科目" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">电话</label>
+            <label class="layui-form-label">监考地点</label>
             <div class="layui-input-block">
-                <input type="text" name="phone" value="${emp.phone}" lay-verify="required" placeholder="请输入电话" autocomplete="off" class="layui-input">
+                <input type="text" name="loc" value="${emp.loc}" lay-verify="required" placeholder="请输入监考地点" autocomplete="off" class="layui-input">
             </div>
         </div>
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <button class="layui-btn" type="button" onclick="submitForm()">修改</button>
-                <button class="layui-btn" type="reset">重置</button>
-            </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">部门</label>
+            <label class="layui-form-label">学院</label>
             <div class="layui-input-block">
                 <select name="deptId">
                     <option value="1">客房部</option>
@@ -47,6 +42,11 @@
                 </select>
             </div>
         </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" type="button" onclick="submitForm()">修改</button>
+                <button class="layui-btn" type="reset">重置</button>
+            </div>
     </form>
     <script>
         layui.use(['table','form'],function (){
