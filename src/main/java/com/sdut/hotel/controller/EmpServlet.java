@@ -31,7 +31,7 @@ public class EmpServlet extends HttpServlet {
 
     //http://localhost:8081/hotel/?method
     //http://localhost:8081/hotel/?deleteById&id=1
-    // /hotel/emp?method=selectByPage&page=1&limit=10&name=&loc=&phone=
+    // /hotel/emp?method=selectByPage&page=1&limit=10&name=&loc=&obj=
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        req.setCharacterEncoding("utf-8");
@@ -81,13 +81,13 @@ public class EmpServlet extends HttpServlet {
         String name = req.getParameter("name");
         String deptId = req.getParameter("deptId");
         String loc = req.getParameter("loc");
-        String phone = req.getParameter("phone");
+        String obj = req.getParameter("obj");
         Emp emp = new Emp();
         emp.setId(Integer.parseInt(id));
         emp.setName(name);
         emp.setDeptId(Integer.parseInt(deptId));
         emp.setLoc(loc);
-        emp.setPhone(phone);
+        emp.setObj(obj);
 
         boolean isSuccess = empService.update(emp);
         if (isSuccess){
@@ -110,12 +110,12 @@ public class EmpServlet extends HttpServlet {
         String name = req.getParameter("name");
         String deptId = req.getParameter("deptId");
         String loc = req.getParameter("loc");
-        String phone = req.getParameter("phone");
+        String obj = req.getParameter("obj");
         Emp emp = new Emp();
         emp.setName(name);
         emp.setDeptId(Integer.parseInt(deptId));
         emp.setLoc(loc);
-        emp.setPhone(phone);
+        emp.setObj(obj);
 
         boolean isSuccess = empService.add(emp);
         if (isSuccess){
@@ -147,9 +147,9 @@ public class EmpServlet extends HttpServlet {
         int limit = Integer.parseInt(req.getParameter("limit"));
         String name = req.getParameter("name");
         String loc = req.getParameter("loc");
-        String phone = req.getParameter("phone");
+        String obj = req.getParameter("obj");
 
-        EmpQuery empQuery = new EmpQuery(page,limit,name,loc,phone);
+        EmpQuery empQuery = new EmpQuery(page,limit,name,loc,obj);
 
         LayUITableResult layUITableResult = empService.selectByPage(empQuery);
         JSONUtil.obj2Json(layUITableResult,resp);

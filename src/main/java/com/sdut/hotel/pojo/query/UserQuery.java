@@ -17,7 +17,7 @@ public class UserQuery {
     private Integer  limit ;
     private String  name ;
     private String  loc ;
-    private String  phone ;
+    private String  obj ;
     private Integer type;
     private Date beginDate;
     private Date endDate;

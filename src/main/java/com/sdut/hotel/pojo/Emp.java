@@ -14,7 +14,7 @@ public class Emp {
     private Integer id;
     private String name;
     private String loc;
-    private String phone;
+    private String obj;
     //所在部门id
     private Integer deptId;
     private Integer deleted;

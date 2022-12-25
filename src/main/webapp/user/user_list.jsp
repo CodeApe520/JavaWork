@@ -43,7 +43,7 @@
 </script>
 
 <div class="demoTable">
-    姓名：
+    教师姓名：
     <div class="layui-inline">
         <input class="layui-input" name="name" id="nameId" autocomplete="off">
     </div>
@@ -51,11 +51,22 @@
     <div class="layui-inline">
         <input class="layui-input" name="loc" id="locId" autocomplete="off">
     </div>
-    手机：
+    监考科目：
     <div class="layui-inline">
-        <input class="layui-input" name="phone" id="phoneId" autocomplete="off">
+        <input class="layui-input" name="obj" id="objId" autocomplete="off">
     </div>
-    管理员:
+    <button class="layui-btn" data-type="reload">搜索</button>
+    <br>
+
+    开始时间：
+    <div class="layui-inline">
+        <input type="text" class="layui-input" id="beginDateId" placeholder="yyyy-MM-dd HH:mm:ss">
+    </div>
+    结束时间：
+    <div class="layui-inline">
+        <input type="text" class="layui-input" id="endDateId" placeholder="yyyy-MM-dd HH:mm:ss">
+    </div>
+    管理员：
     <div class="layui-inline">
         <select id="typeId" name="type">
             <option value="">--类型--</option>
@@ -63,15 +74,6 @@
             <option value="2">教师</option>
         </select>
     </div>
-    开始时间
-    <div class="layui-inline">
-        <input type="text" class="layui-input" id="beginDateId" placeholder="yyyy-MM-dd HH:mm:ss">
-    </div>
-    结束时间
-    <div class="layui-inline">
-        <input type="text" class="layui-input" id="endDateId" placeholder="yyyy-MM-dd HH:mm:ss">
-    </div>
-    <button class="layui-btn" data-type="reload">搜索</button>
 </div>
 <table class="layui-hide" id="test" lay-filter="test"></table>
 
@@ -102,7 +104,7 @@
                 ,{field:'name', title: '监考员姓名'}
                 ,{field:'type', title: '管理员类型',templet: '#typeTemplet'}
                 ,{field:'password', title: '密码'}
-                ,{field:'phone', title: '考试科目'}
+                ,{field:'obj', title: '考试科目'}
                 ,{field:'loc', title: '监考地点'}
                 ,{field:'status', title: '状态',templet: '#statusTemplet'}
                 ,{field:'gmtCreate', title: '开始时间',templet:"<div>{{!d.gmtCreate.time?'':layui.util.toDateString(d.gmtCreate.time, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
@@ -231,7 +233,7 @@
                     ,where: {
                         name: $('#nameId').val(),
                         loc: $('#locId').val(),
-                        phone: $('#phoneId').val(),
+                        obj: $('#objId').val(),
                         type: $('#typeId').val(),
                         beginDate: $('#beginDateId').val(),
                         endDate: $('#endDateId').val(),
@@ -268,7 +270,7 @@
                 <td>${user.name}</td>
                 <td>${user.password}</td>
                 <td>${user.loc}</td>
-                <td>${user.phone}</td>
+                <td>${user.obj}</td>
                 &lt;%&ndash;<td><a href="${path}/user?method=deleteById&id=${user.id}">删除</a></td>&ndash;%&gt;
                 <td><a href="javascript:deleteById(${user.id})">删除</a></td>
             </tr>

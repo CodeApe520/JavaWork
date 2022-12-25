@@ -19,7 +19,7 @@ public class User {
     private String name;
     private String password;
     private String loc;
-    private String phone;
+    private String obj;
     private String avatar;
     private Integer status;
     private Integer deleted;        //逻辑删除

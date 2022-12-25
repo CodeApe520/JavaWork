@@ -198,7 +198,7 @@
 <%--                <td>${dept.name}</td>--%>
 <%--                <td>${dept.password}</td>--%>
 <%--                <td>${dept.loc}</td>--%>
-<%--                <td>${dept.phone}</td>--%>
+<%--                <td>${dept.obj}</td>--%>
 <%--&lt;%&ndash;                <td><a href="${path}/dept?method=deleteById&id=${dept.id}">删除</a> </td>&ndash;%&gt;--%>
 <%--                <td><a href="javascript:deleteById(${dept.id})">删除</a> </td>--%>
 <%--            </tr>--%>

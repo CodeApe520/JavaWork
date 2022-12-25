@@ -41,7 +41,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">考试科目</label>
             <div class="layui-input-block">
-                <input type="text" name="phone" value="${user.phone}" lay-verify="required" placeholder="请输入考试科目" autocomplete="off" class="layui-input">
+                <input type="text" name="obj" value="${user.obj}" lay-verify="required" placeholder="请输入考试科目" autocomplete="off" class="layui-input">
             </div>
         </div>
 

@@ -39,7 +39,7 @@
         </div>
         考试科目：
         <div class="layui-inline">
-            <input class="layui-input" name="phone" id="phoneId" autocomplete="off">
+            <input class="layui-input" name="obj" id="objId" autocomplete="off">
         </div>
         <button class="layui-btn" data-type="reload">搜索</button>
     </div>
@@ -60,7 +60,7 @@
                     {checkbox: true, fixed: true}
                     ,{field:'id', title: 'ID', sort: true, fixed: true}
                     ,{field:'name', title: '监考员姓名'}
-                    ,{field:'phone', title: '考试科目'}
+                    ,{field:'obj', title: '考试科目'}
                     ,{field:'loc', title: '监考地点'}
                     ,{field:'deptId', title: '学院编号'}
                     ,{field:'deptName', title: '学院名称'}
@@ -173,7 +173,7 @@
                         ,where: {
                            name : $('#nameId').val(),
                            loc : $('#locId').val(),
-                           phone : $('#phoneId').val(),
+                           obj : $('#objId').val(),
                         }
                     });
                 }
@@ -204,7 +204,7 @@
 <%--                <td>${emp.name}</td>--%>
 <%--                <td>${emp.password}</td>--%>
 <%--                <td>${emp.loc}</td>--%>
-<%--                <td>${emp.phone}</td>--%>
+<%--                <td>${emp.obj}</td>--%>
 <%--&lt;%&ndash;                <td><a href="${path}/emp?method=deleteById&id=${emp.id}">删除</a> </td>&ndash;%&gt;--%>
 <%--                <td><a href="javascript:deleteById(${emp.id})">删除</a> </td>--%>
 <%--            </tr>--%>

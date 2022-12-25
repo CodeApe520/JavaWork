@@ -15,5 +15,5 @@ public class EmpQuery {
     private Integer  limit ;
     private String  name ;
     private String  loc ;
-    private String  phone ;
+    private String  obj ;
 }
