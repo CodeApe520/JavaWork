@@ -40,7 +40,6 @@
                 <c:forEach items="${list}" var="dept">
                     <option value="${dept.id}">${dept.name}</option>
                 </c:forEach>
-
             </select>
         </div>
     </div>

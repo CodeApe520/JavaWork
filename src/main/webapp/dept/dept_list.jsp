@@ -35,7 +35,7 @@
         <div class="layui-inline">
             <input class="layui-input" name="name" id="nameId" autocomplete="off">
         </div>
-        监考地点：
+        监考范围：
         <div class="layui-inline">
             <input class="layui-input" name="addr" id="addrId" autocomplete="off">
         </div>

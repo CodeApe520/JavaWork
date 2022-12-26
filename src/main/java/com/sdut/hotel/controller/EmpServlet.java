@@ -77,7 +77,7 @@ public class EmpServlet extends HttpServlet {
     private void update(HttpServletRequest req, HttpServletResponse resp) {
         System.out.println("EmpServlet.update");
         String id = req.getParameter("id");
-        System.out.println("EmpServlet.add");
+        System.out.println(id+"+++++++");
         String name = req.getParameter("name");
         String deptId = req.getParameter("deptId");
         String loc = req.getParameter("loc");
@@ -99,9 +99,8 @@ public class EmpServlet extends HttpServlet {
 
     private void getEmpUpdatePage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("EmpServlet.getEmpUpdatePage");
-        String id = req.getParameter("id");
-        Emp emp = empService.selectById(Integer.parseInt(id));
-        req.setAttribute("emp",emp);
+        List<Dept> list = deptService.selectAll();
+        req.setAttribute("list",list);
         req.getRequestDispatcher("/emp/emp_update.jsp").forward(req,resp);
     }
 

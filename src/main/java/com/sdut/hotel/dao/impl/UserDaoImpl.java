@@ -21,14 +21,14 @@ public class UserDaoImpl implements IUserDao {
     private JdbcTemplate jdbcTemplate = new JdbcTemplate(JDBCUtil.getDataSource());
     @Override
     public List<User> selectAll() {
-        String sql = "select id,name,password,loc,obj from user";
+        String sql = "select id,name,password,phone,email from user";
         List<User> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<User>(User.class));
         return list;
     }
 
     @Override
     public List<User> selectByPage(UserQuery userQuery) {
-        String sql = "select id,name,type,password,loc,obj,status,gmt_create,gmt_modified from user ";
+        String sql = "select id,name,type,password,phone,email,status,gmt_create,gmt_modified from user ";
 
         //查询参数
         List<Object> args = new ArrayList<>();
@@ -37,13 +37,13 @@ public class UserDaoImpl implements IUserDao {
             where += "and name like ?";
             args.add("%"+userQuery.getName() +"%");
         }
-        if (!StringUtils.isEmpty(userQuery.getLoc())){
-            where += "and loc=?";
-            args.add(userQuery.getLoc());
+        if (!StringUtils.isEmpty(userQuery.getPhone())){
+            where += "and phone=?";
+            args.add(userQuery.getPhone());
         }
-        if (!StringUtils.isEmpty(userQuery.getObj())){
-            where += "and obj=?";
-            args.add(userQuery.getObj());
+        if (!StringUtils.isEmpty(userQuery.getEmail())){
+            where += "and email=?";
+            args.add(userQuery.getEmail());
         }
         if(userQuery.getBeginDate() != null && userQuery.getEndDate() != null){
             where += "and gmt_create between ? and ? ";
@@ -76,13 +76,13 @@ public class UserDaoImpl implements IUserDao {
             where += "and name like ?";
             args.add("%"+userQuery.getName() +"%");
         }
-        if (!StringUtils.isEmpty(userQuery.getLoc())){
-            where += "and loc=?";
-            args.add(userQuery.getLoc());
+        if (!StringUtils.isEmpty(userQuery.getPhone())){
+            where += "and phone=?";
+            args.add(userQuery.getPhone());
         }
         if (!StringUtils.isEmpty(userQuery.getName())){
-            where += "and obj=?";
-            args.add(userQuery.getObj());
+            where += "and email=?";
+            args.add(userQuery.getEmail());
         }
         if(userQuery.getType() !=null){
             where += "and type =?";
@@ -117,21 +117,21 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public Integer add(User user) {
-        String sql = "insert into user(name,password,loc,obj,avatar,type) values(?,?,?,?,?,?)";
-        int count = jdbcTemplate.update(sql, user.getName(),user.getPassword(),user.getLoc(),user.getObj(),user.getAvatar(),user.getType());
+        String sql = "insert into user(name,password,phone,email,avatar,type) values(?,?,?,?,?,?)";
+        int count = jdbcTemplate.update(sql, user.getName(),user.getPassword(),user.getPhone(),user.getEmail(),user.getAvatar(),user.getType());
         return count;
     }
 
     @Override
     public Integer register(User user) {
-        String sql = "insert into user(name,password,type) values(?,?,2)";
-        int count = jdbcTemplate.update(sql, user.getName(),user.getPassword());
+        String sql = "insert into user(name,password,phone,email,avatar,type) values(?,?,?,?,?,?)";
+        int count = jdbcTemplate.update(sql, user.getName(),user.getPassword(),user.getPhone(),user.getEmail(),user.getAvatar(),user.getType());
         return count;
     }
 
     @Override
     public User selectById(int id) {
-        String sql = "select id,`name`,password,loc,obj from user where id=?";
+        String sql = "select id,`name`,password,phone,email from user where id=?";
         //User user = jdbcTemplate.queryForObject(sql, User.class, id);
         List<User> list = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class), id);
         if (CollectionUtils.isEmpty(list)){
@@ -142,14 +142,14 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public Integer update(User user) {
-        String sql = "update user set name=?,password=?,loc=?,obj=?,avatar=? where id=?";
-        int count = jdbcTemplate.update(sql, user.getName(),user.getPassword(),user.getLoc(),user.getObj(),user.getAvatar(),user.getId());
+        String sql = "update user set name=?,password=?,phone=?,email=?,avatar=? where id=?";
+        int count = jdbcTemplate.update(sql, user.getName(),user.getPassword(),user.getPhone(),user.getEmail(),user.getAvatar(),user.getId());
         return count;    }
 
     @Override
     public User login(String name, String password) {
         System.out.println("UserDaoImpl.login");
-        String sql = "select id,name,password,loc,obj,type,status from user where name=? and password =?";
+        String sql = "select id,name,password,phone,email,type,status from user where name=? and password =?";
 //        User user = jdbcTemplate.queryForObject(sql,new BeanPropertyRowMapper<User>(User.class),name,password);
 //        return user;
         List<User> list = jdbcTemplate.query(sql,new BeanPropertyRowMapper<User>(User.class),name,password);

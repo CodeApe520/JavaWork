@@ -17,7 +17,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-block">
-                <input type="text" name="name" value="${emp.name}" autocomplete="off" placeholder="请输入姓名" class="layui-input">
+                <input type="text" name="name" value="${emp.name}" lay-verify="required" placeholder="请输入姓名" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -32,13 +32,13 @@
                 <input type="text" name="loc" value="${emp.loc}" lay-verify="required" placeholder="请输入监考地点" autocomplete="off" class="layui-input">
             </div>
         </div>
-        </div>
         <div class="layui-form-item">
             <label class="layui-form-label">学院</label>
             <div class="layui-input-block">
                 <select name="deptId">
-                    <option value="1">客房部</option>
-                    <option value="2">保洁部</option>
+                    <c:forEach items="${list}" var="dept">
+                        <option value="${dept.id}">${dept.name}</option>
+                    </c:forEach>
                 </select>
             </div>
         </div>
@@ -47,6 +47,7 @@
                 <button class="layui-btn" type="button" onclick="submitForm()">修改</button>
                 <button class="layui-btn" type="reset">重置</button>
             </div>
+        </div>
     </form>
     <script>
         layui.use(['table','form'],function (){

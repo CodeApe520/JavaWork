@@ -43,17 +43,17 @@
 </script>
 
 <div class="demoTable">
-    教师姓名：
+    用户名：
     <div class="layui-inline">
         <input class="layui-input" name="name" id="nameId" autocomplete="off">
     </div>
-    监考地点：
+    手机号：
     <div class="layui-inline">
-        <input class="layui-input" name="loc" id="locId" autocomplete="off">
+        <input class="layui-input" name="phone" id="phoneId" autocomplete="off">
     </div>
-    监考科目：
+    邮箱：
     <div class="layui-inline">
-        <input class="layui-input" name="obj" id="objId" autocomplete="off">
+        <input class="layui-input" name="email" id="emailId" autocomplete="off">
     </div>
     <button class="layui-btn" data-type="reload">搜索</button>
     <br>
@@ -104,11 +104,10 @@
                 ,{field:'name', title: '监考员姓名'}
                 ,{field:'type', title: '管理员类型',templet: '#typeTemplet'}
                 ,{field:'password', title: '密码'}
-                ,{field:'obj', title: '考试科目'}
-                ,{field:'loc', title: '监考地点'}
+                ,{field:'phone', title: '手机号'}
+                ,{field:'email', title: '邮箱'}
                 ,{field:'status', title: '状态',templet: '#statusTemplet'}
-                ,{field:'gmtCreate', title: '开始时间',templet:"<div>{{!d.gmtCreate.time?'':layui.util.toDateString(d.gmtCreate.time, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
-                ,{field:'gmtModified', title: '结束时间',templet:"<div>{{!d.gmtModified.time?'':layui.util.toDateString(d.gmtModified.time, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
+                ,{field:'gmtCreate', title: '创建时间',templet:"<div>{{!d.gmtCreate.time?'':layui.util.toDateString(d.gmtCreate.time, 'yyyy-MM-dd HH:mm:ss')}}</div>"}
                 ,{field:'', title: '操作', toolbar: '#barDemo'}
             ]]
             ,id: 'tableId'
@@ -116,10 +115,10 @@
         });
 
         //监听性别操作
-        form.on('switch(satusLayFilter)', function(obj){
-            //layer.tips(this.value + ' ' + this.name + '：'+ obj.elem.checked, obj.othis);
-            console.log(this.value + ' ' + this.name + '：'+ obj.elem.checked);
-            var status = obj.elem.checked == true ? 1 : 0;
+        form.on('switch(satusLayFilter)', function(email){
+            //layer.tips(this.value + ' ' + this.name + '：'+ email.elem.checked, email.othis);
+            console.log(this.value + ' ' + this.name + '：'+ email.elem.checked);
+            var status = email.elem.checked == true ? 1 : 0;
             $.post(
                 '${path}/user?method=updateStatus',
                 {'id':this.value, 'status': status},
@@ -136,11 +135,11 @@
         });
 
         //头工具栏事件
-        table.on('toolbar(test)', function(obj){
-            var checkStatus = table.checkStatus(obj.config.id);
-            switch(obj.event){
+        table.on('toolbar(test)', function(email){
+            var checkStatus = table.checkStatus(email.config.id);
+            switch(email.event){
                 case 'add':
-                    // location.href = '${path}/user/user_add.jsp';
+                    // phoneation.href = '${path}/user/user_add.jsp';
                     layer.open({
                         type: 2,
                         area: ['700px', '400px'],
@@ -149,7 +148,7 @@
                     break;
                 case 'deleteAll':
                     var data = checkStatus.data;
-                    //[{avatar: '', deleted: 0, loc: '12', gmtCreate: null, gmtModified: null, …}, {avatar: '', deleted: 0, loc: '13', gmtCreate: null, gmtModified: null, …}]
+                    //[{avatar: '', deleted: 0, phone: '12', gmtCreate: null, gmtModified: null, …}, {avatar: '', deleted: 0, phone: '13', gmtCreate: null, gmtModified: null, …}]
                     layer.msg('选中了：'+ data.length + ' 个');
                     var idArray = new Array();
                     for (var i = 0; i < data.length; i++) {
@@ -191,9 +190,9 @@
         });
 
         //监听右侧工具条
-        table.on('tool(test)', function(obj){
-            var data = obj.data;
-            if(obj.event === 'del'){
+        table.on('tool(test)', function(email){
+            var data = email.data;
+            if(email.event === 'del'){
                 layer.confirm('真的删除行么', function(index){
                     $.post(
                         '${path}/user?method=deleteById',
@@ -213,7 +212,7 @@
 
                     layer.close(index);
                 });
-            } else if(obj.event === 'edit'){
+            } else if(email.event === 'edit'){
                 layer.open({
                     type: 2,
                     area: ['700px', '400px'],
@@ -232,8 +231,8 @@
                     }
                     ,where: {
                         name: $('#nameId').val(),
-                        loc: $('#locId').val(),
-                        obj: $('#objId').val(),
+                        phone: $('#phoneId').val(),
+                        email: $('#emailId').val(),
                         type: $('#typeId').val(),
                         beginDate: $('#beginDateId').val(),
                         endDate: $('#endDateId').val(),
@@ -269,8 +268,8 @@
                 <td>${user.id}</td>
                 <td>${user.name}</td>
                 <td>${user.password}</td>
-                <td>${user.loc}</td>
-                <td>${user.obj}</td>
+                <td>${user.phone}</td>
+                <td>${user.email}</td>
                 &lt;%&ndash;<td><a href="${path}/user?method=deleteById&id=${user.id}">删除</a></td>&ndash;%&gt;
                 <td><a href="javascript:deleteById(${user.id})">删除</a></td>
             </tr>
@@ -281,7 +280,7 @@
         function deleteById(id) {
             var isDelete = confirm('您确认要删除么？');
             if (isDelete) {
-                location.href = "${path}/user?method=deleteById&id=" + id;
+                phoneation.href = "${path}/user?method=deleteById&id=" + id;
             }
         }
     </script>--%>

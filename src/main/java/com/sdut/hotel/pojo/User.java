@@ -18,8 +18,8 @@ public class User {
     private Integer id;
     private String name;
     private String password;
-    private String loc;
-    private String obj;
+    private String phone;
+    private String email;
     private String avatar;
     private Integer status;
     private Integer deleted;        //逻辑删除
