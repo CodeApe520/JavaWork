@@ -17,6 +17,7 @@ public interface IUserService {
     Boolean deleteById(Integer id);
     Boolean deleteAll(String[] array);
     Boolean add(User user);
+    Boolean register(User user);
     User selectById(int id);
     Boolean update(User user);
     User login(String name, String password);

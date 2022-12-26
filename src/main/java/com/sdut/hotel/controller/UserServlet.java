@@ -60,8 +60,27 @@ public class UserServlet extends HttpServlet {
             case "updateStatus":
                 updateStatus(req,resp);
                 break;
+            case "register":
+                register(req,resp);
         }
 
+
+    }
+
+    private void register(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        System.out.println("UserServlet.add");
+        String name = req.getParameter("name");
+        String password = req.getParameter("password");
+        User user = new User();
+        user.setName(name);
+        user.setPassword(password);
+
+        boolean isSuccess = userService.register(user);
+        if (isSuccess){
+            JSONUtil.obj2Json(JSONResult.ok("注册成功"),resp);
+        }else {
+            JSONUtil.obj2Json(JSONResult.error("注册失败"),resp);
+        }
 
     }
 

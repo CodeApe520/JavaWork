@@ -123,6 +123,13 @@ public class UserDaoImpl implements IUserDao {
     }
 
     @Override
+    public Integer register(User user) {
+        String sql = "insert into user(name,password,type) values(?,?,2)";
+        int count = jdbcTemplate.update(sql, user.getName(),user.getPassword());
+        return count;
+    }
+
+    @Override
     public User selectById(int id) {
         String sql = "select id,`name`,password,loc,obj from user where id=?";
         //User user = jdbcTemplate.queryForObject(sql, User.class, id);

@@ -60,6 +60,14 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public Boolean register(User user) {
+        //添加用户时候将密码以密文形式储存在数据库中
+        user.setPassword(MD5Util.MD5Encode(user.getPassword()));
+        int count = userDao.add(user);
+        return count == 1;
+    }
+
+    @Override
     public User selectById(int id) {
         return userDao.selectById(id);
     }

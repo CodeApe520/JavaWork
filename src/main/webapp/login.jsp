@@ -107,7 +107,7 @@
             </form>
         </div>
         <div class="msg">
-            Don't have account?<a href='register.jsp' style="font-weight: bold;">Sign up</a>
+            Don't have account?<a href='/register.jsp' style="font-weight: bold;" >Sign up</a>
         </div>
     </div>
 </div>

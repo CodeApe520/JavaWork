@@ -18,6 +18,7 @@ public interface IUserDao {
     Integer deleteById(Integer id);
     Integer deleteAll(Integer[] ids);
     Integer add(User user);
+    Integer register(User user);
     User selectById(int id);
     Integer update(User user);
     User login(String name, String password);

@@ -19,7 +19,7 @@ import java.net.HttpRetryException;
 //Date: 2022/12/23
 //Time: 08:53
 //  /*代表拦截所有的请求
-//@WebFilter(filterName = "login" , urlPatterns = "/*")
+@WebFilter(filterName = "login" , urlPatterns = "/*")
 public class LoginFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -42,8 +42,10 @@ public class LoginFilter implements Filter {
                 || servletPath.endsWith(".js")
                 || servletPath.endsWith(".css")
                 || servletPath.equals("/login.jsp")
+                || servletPath.equals("/register.jsp")
                 || servletPath.equals("/auth")
-                || servletPath.equals("/login")){
+                || servletPath.equals("/login")
+                || servletPath.equals("/user")){
             chain.doFilter(request,response);
             return;
         }
