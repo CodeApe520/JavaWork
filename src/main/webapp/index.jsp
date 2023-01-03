@@ -18,17 +18,17 @@
 				        	用户: ${user.name}
 <%-- 				        	[${user.name}] --%>
 				    </a>
-<%--					<dl class="layui-nav-child">--%>
+					<dl class="layui-nav-child">
 <%--						<dd>--%>
 <%--							<a href="javascript:openUser()">基本资料</a>--%>
 <%--						</dd>--%>
 <%--						<dd>--%>
 <%--							<a href="javascript:openPass()">修改密码</a>--%>
 <%--						</dd>--%>
-<%--						<dd>--%>
-<%--                            <a href="javascript:openPic()">修改头像</a>--%>
-<%--                        </dd>--%>
-<%--					</dl>--%>
+						<dd>
+                            <a href="/user/user_update1.jsp">修改个人信息</a>
+                        </dd>
+					</dl>
 				</li>
 				<li class="layui-nav-item">
 				    <a href="javascript:logout()">注销</a>
@@ -112,6 +112,7 @@
 					}
 			);
 		}
+
 
 	</script>
 </body>

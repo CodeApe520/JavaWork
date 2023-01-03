@@ -99,8 +99,11 @@ public class EmpServlet extends HttpServlet {
 
     private void getEmpUpdatePage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("EmpServlet.getEmpUpdatePage");
+        String id =req.getParameter("id");
+        Emp emp = empService.selectById(Integer.parseInt(id));
         List<Dept> list = deptService.selectAll();
         req.setAttribute("list",list);
+        req.setAttribute("emp",emp);
         req.getRequestDispatcher("/emp/emp_update.jsp").forward(req,resp);
     }
 
