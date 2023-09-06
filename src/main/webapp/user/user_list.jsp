@@ -33,7 +33,11 @@
     {{#     if (d.type==1) {            }}
     <span class="layui-badge layui-bg-orange">管理员</span>
     {{#     } else if (d.type==2) {     }}
+    <span class="layui-badge layui-bg-green">督导</span>
+    {{#     } else if (d.type==3) {     }}
     <span class="layui-badge layui-bg-green">教师</span>
+    {{#     } else if (d.type==4) {     }}
+    <span class="layui-badge layui-bg-green">学生</span>
     {{#     }                           }}
 </script>
 
@@ -66,12 +70,14 @@
     <div class="layui-inline">
         <input type="text" class="layui-input" id="endDateId" placeholder="yyyy-MM-dd HH:mm:ss">
     </div>
-    管理员：
+    账号类型：
     <div class="layui-inline">
         <select id="typeId" name="type">
             <option value="">--类型--</option>
             <option value="1">管理员</option>
-            <option value="2">教师</option>
+            <option value="2">督导</option>
+            <option value="3">教师</option>
+            <option value="4">学生</option>
         </select>
     </div>
 </div>
@@ -101,8 +107,8 @@
             ,cols: [[
                 {checkbox: true, fixed: true}
                 ,{field:'id', title: 'ID', sort: true}
-                ,{field:'name', title: '监考员姓名'}
-                ,{field:'type', title: '管理员类型',templet: '#typeTemplet'}
+                ,{field:'name', title: '用户名'}
+                ,{field:'type', title: '账号类型',templet: '#typeTemplet'}
                 ,{field:'password', title: '密码'}
                 ,{field:'phone', title: '手机号'}
                 ,{field:'email', title: '邮箱'}

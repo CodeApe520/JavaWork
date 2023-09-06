@@ -58,7 +58,7 @@ public class UserDaoImpl implements IUserDao {
         String  limit = "";
         if (userQuery != null){
             int offset =(userQuery.getPage() - 1) * userQuery.getLimit();
-            limit = " order by id desc limit "+ offset + ","+ userQuery.getLimit();
+            limit = " order by id asc limit "+ offset + ","+ userQuery.getLimit();
         }
         List<User> list = jdbcTemplate.query(sql + where + limit, new BeanPropertyRowMapper<User>(User.class),args.toArray());
         return list;

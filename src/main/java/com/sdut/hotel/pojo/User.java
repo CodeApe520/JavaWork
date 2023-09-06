@@ -25,6 +25,6 @@ public class User {
     private Integer deleted;        //逻辑删除
     private Date gmtCreate;         //创建时间
     private Date gmtModified;       //更新时间
-    //1-超级管理员 2-普通管理员
+    //1-管理员 2-督导 3-教师 4-学生
     private Integer type;
 }

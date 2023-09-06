@@ -87,7 +87,7 @@
 			</div>
 		</div>
 			<div class="layui-body"><!-- 内容主体区域 -->
-				<iframe name="rightframe" width="99%" height="97%" src="${path}/emp/emp_list.jsp"></iframe>
+				<iframe name="rightframe" width="99%" height="97%" src="${path}/page_origin.jsp"></iframe>
 			</div>
 		<div class="layui-footer">© 监考管理查询系统</div>
 	</div>

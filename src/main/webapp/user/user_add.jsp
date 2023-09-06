@@ -41,7 +41,9 @@
             <label class="layui-form-label">类型</label>
             <div class="layui-input-block">
                 <input type="radio" name="type" value="1" title="管理员" checked="">
-                <input type="radio" name="type" value="2" title="教师">
+                <input type="radio" name="type" value="2" title="督导">
+                <input type="radio" name="type" value="3" title="教师">
+                <input type="radio" name="type" value="4" title="学生">
             </div>
         </div>
         <div class="layui-form-item">
