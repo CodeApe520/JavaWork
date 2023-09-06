@@ -108,12 +108,14 @@ public class UserServlet extends HttpServlet {
         System.out.println("UserServlet.update");
         String id = req.getParameter("id");
         String name = req.getParameter("name");
+        String nickname = req.getParameter("nickname");
         String password = req.getParameter("password");
         String phone = req.getParameter("phone");
         String email = req.getParameter("email");
         User user = new User();
         user.setId(Integer.parseInt(id));
         user.setName(name);
+        user.setNickname(nickname);
         user.setPassword(password);
         user.setPhone(phone);
         user.setEmail(email);
@@ -138,12 +140,14 @@ public class UserServlet extends HttpServlet {
     private void add(HttpServletRequest req, HttpServletResponse resp) {
         System.out.println("UserServlet.add");
         String name = req.getParameter("name");
+        String nickname = req.getParameter("nickname");
         String password = req.getParameter("password");
         String phone = req.getParameter("phone");
         String email = req.getParameter("email");
         String type = req.getParameter("type");
         User user = new User();
         user.setName(name);
+        user.setNickname(nickname);
         user.setPassword(password);
         user.setPhone(phone);
         user.setEmail(email);

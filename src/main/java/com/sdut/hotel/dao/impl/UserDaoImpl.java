@@ -121,8 +121,8 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public Integer add(User user) {
-        String sql = "insert into user(name,password,phone,email,avatar,type) values(?,?,?,?,?,?)";
-        int count = jdbcTemplate.update(sql, user.getName(),user.getPassword(),user.getPhone(),user.getEmail(),user.getAvatar(),user.getType());
+        String sql = "insert into user(name,nickname,password,phone,email,avatar,type) values(?,?,?,?,?,?,?)";
+        int count = jdbcTemplate.update(sql, user.getName(),user.getNickname(),user.getPassword(),user.getPhone(),user.getEmail(),user.getAvatar(),user.getType());
         return count;
     }
 
@@ -146,8 +146,8 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public Integer update(User user) {
-        String sql = "update user set name=?,password=?,phone=?,email=?,avatar=? where id=?";
-        int count = jdbcTemplate.update(sql, user.getName(),user.getPassword(),user.getPhone(),user.getEmail(),user.getAvatar(),user.getId());
+        String sql = "update user set name=?,nickname=?,password=?,phone=?,email=?,avatar=? where id=?";
+        int count = jdbcTemplate.update(sql, user.getName(),user.getNickname(),user.getPassword(),user.getPhone(),user.getEmail(),user.getAvatar(),user.getId());
         return count;    }
 
     @Override
