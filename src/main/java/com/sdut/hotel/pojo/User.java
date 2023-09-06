@@ -17,6 +17,7 @@ import java.util.Date;
 public class User {
     private Integer id;
     private String name;
+    private String nickname;
     private String password;
     private String phone;
     private String email;
@@ -27,4 +28,5 @@ public class User {
     private Date gmtModified;       //更新时间
     //1-管理员 2-督导 3-教师 4-学生
     private Integer type;
+
 }

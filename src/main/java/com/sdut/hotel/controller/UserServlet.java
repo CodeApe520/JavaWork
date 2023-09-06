@@ -179,6 +179,7 @@ public class UserServlet extends HttpServlet {
         int page = Integer.parseInt(req.getParameter("page"));
         int limit = Integer.parseInt(req.getParameter("limit"));
         String name = req.getParameter("name");
+        String nickname = req.getParameter("nickname");
         String phone = req.getParameter("phone");
         String email = req.getParameter("email");
         String typeStr = req.getParameter("type");
@@ -189,7 +190,7 @@ public class UserServlet extends HttpServlet {
         String beginDate = req.getParameter("beginDate");
         String endDate = req.getParameter("endDate");
 
-        UserQuery userQuery = new UserQuery(page,limit,name,phone,email,type, DateUtil.parse(beginDate),DateUtil.parse(endDate));
+        UserQuery userQuery = new UserQuery(page,limit,name,nickname,phone,email,type, DateUtil.parse(beginDate),DateUtil.parse(endDate));
 
 
         LayUITableResult layUITableResult = userService.selectByPage(userQuery);

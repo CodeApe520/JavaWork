@@ -108,6 +108,7 @@
                 {checkbox: true, fixed: true}
                 ,{field:'id', title: 'ID', sort: true}
                 ,{field:'name', title: '用户名'}
+                ,{field:'nickname', title: '昵称'}
                 ,{field:'type', title: '账号类型',templet: '#typeTemplet'}
                 ,{field:'password', title: '密码'}
                 ,{field:'phone', title: '手机号'}
@@ -237,6 +238,7 @@
                     }
                     ,where: {
                         name: $('#nameId').val(),
+                        name: $('#nicknameId').val(),
                         phone: $('#phoneId').val(),
                         email: $('#emailId').val(),
                         type: $('#typeId').val(),

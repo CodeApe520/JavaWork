@@ -28,7 +28,7 @@ public class UserDaoImpl implements IUserDao {
 
     @Override
     public List<User> selectByPage(UserQuery userQuery) {
-        String sql = "select id,name,type,password,phone,email,status,gmt_create,gmt_modified from user ";
+        String sql = "select id,name,nickname,type,password,phone,email,status,gmt_create,gmt_modified from user ";
 
         //查询参数
         List<Object> args = new ArrayList<>();
@@ -36,6 +36,10 @@ public class UserDaoImpl implements IUserDao {
         if (!StringUtils.isEmpty(userQuery.getName())){
             where += "and name like ?";
             args.add("%"+userQuery.getName() +"%");
+        }
+        if (!StringUtils.isEmpty(userQuery.getName())){
+            where += "and nickname=?";
+            args.add("%"+userQuery.getNickname() +"%");
         }
         if (!StringUtils.isEmpty(userQuery.getPhone())){
             where += "and phone=?";
